@@ -4,8 +4,6 @@ import pama1234.gdx.game.app.app0002.Screen0055;
 import pama1234.gdx.game.love.state0055.State0055Util.StateEntity0055;
 import pama1234.gdx.util.entity.Entity;
 import pama1234.gdx.util.entity.EntityNeo;
-import pama1234.math.MathPool;
-import pama1234.math.MathTools;
 import pama1234.math.vec.Vec3f;
 import space.earlygrey.shapedrawer.CapType;
 
@@ -52,42 +50,50 @@ public class CharacterTest extends StateEntity0055{
 
     @Override
     public void display() {
-      //      Thread.yield();
-      //      System.out.println(p.centerNeo.list.size());
-      //      System.out.println(p.centerCam.list.size());
-      //            p.centerCam.list.forEach(e->System.out.println(e));
-
-      //      new Exception().printStackTrace();
-      //      p.rendererEnd();
-
-      //      p.fill(0);
-      //      p.capType=CapType.ROUND;
+      //      float l=3;
+      //
+      //      p.noStroke();
+      //      p.circle(a.x,a.y,a.z,l,0);
+      //      p.circle(b.x,b.y,b.z,l,0);
+      //      p.circle(c.x,c.y,c.z,l,0);
+      //
+      //      var cam=p.usedCamera.position;
+      //      var foot=MathTools.perpendicularFoot(a.x,a.y,a.z,b.x,b.y,b.z,cam.x,cam.y,cam.z);
+      //      float ox=foot.x;
+      //      float oy=foot.y;
+      //      float oz=foot.z;
+      //
+      //      MathPool.vec3fPool.free(foot);
+      //      p.circle(ox,oy,oz,l,0);
+      //
       //      p.doStroke();
-      //      p.strokeWeight(1);
-      //      p.pushMatrix();
-      //      p.clearMatrix();
+      //      p.line(a.x,a.y,a.z,b.x,b.y,b.z);
 
-      float l=3;
+            int l=100;
+            p.line(l,0,0,0,l,0); // 边1
+            p.line(0,l,0,-l,0,0); // 边2
+            p.line(-l,0,0,0,-l,0); // 边3
+            p.line(0,-l,0,l,0,0); // 边4
 
-      p.noStroke();
-      p.circle(a.x,a.y,a.z,l,0);
-      p.circle(b.x,b.y,b.z,l,0);
-      p.circle(c.x,c.y,c.z,l,0);
+            p.line(0,0,l,l,0,0); // 边5
+            p.line(l,0,0,0,0,-l); // 边6
+            p.line(0,0,-l,-l,0,0); // 边7
+            p.line(-l,0,0,0,0,l); // 边8
 
-      var cam=p.usedCamera.position;
-      var foot=MathTools.perpendicularFoot(a.x,a.y,a.z,b.x,b.y,b.z,cam.x,cam.y,cam.z);
-      float ox=foot.x;
-      float oy=foot.y;
-      float oz=foot.z;
+      //      p.line(100,0,0,0,100,0); // 边1
 
-      MathPool.vec3fPool.free(foot);
-      p.circle(ox,oy,oz,l,0);
-
-      p.doStroke();
-      p.line(a.x,a.y,a.z,b.x,b.y,b.z);
-      //      p.line(0,0,0,100);
-
-      //      p.popMatrix();
+//      for(int i=0;i<=100;i+=5) {
+//        //        p.stroke((int)(i/100f*255),0,0);
+//        p.line(0,0,i,0,100,i);
+//      }
+//      for(int i=0;i<=100;i+=5) {
+//        //        p.stroke(0,(int)(i/100f*255),0);
+//        p.line(0,i,0,100,i,0);
+//      }
+//      for(int i=0;i<=100;i+=5) {
+//        //        p.stroke(0,0,(int)(i/100f*255));
+//        p.line(i,0,0,i,0,100);
+//      }
     }
   }
 
