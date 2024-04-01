@@ -50,7 +50,6 @@ public class Duel3D extends StateEntity0055{
 
     p.centerCamAddAll(telescope);
 
-    //    p.cam3d.point.des.set(0,0,-1024);
     customShapeDrawer=new ShapeDrawer(batch3d=new SpriteBatch3D(p.cam3d.camera));
 
     bulletTarget=p.cam3d.point.pos;
@@ -81,7 +80,6 @@ public class Duel3D extends StateEntity0055{
         reset(test);
       }
     });
-    //    telescope.update();
   }
 
   public void reset(BulletEntity bullet) {
@@ -91,27 +89,18 @@ public class Duel3D extends StateEntity0055{
 
   public void resetPoint(ReversedPathPoint3D test) {
     int range=500;
-    //    test.set(
-    //      p.random(-20,20),p.random(-20,20),p.random(-20,20),
-    //      p.random(-range,range),p.random(-range,range),p.random(-range,range));
     int startRange=50;
     int shiftRange=50;
     int desRange=50+abs((p.frameCount/10)%(shiftRange*2)-shiftRange);
-    //    int desRange=10;
     test.set(
       p.random(-startRange,startRange),p.random(-startRange,startRange),p.random(-startRange,startRange),
-      //      bulletTarget.x,bulletTarget.y+40,bulletTarget.z);
       p.random(-desRange,desRange)-2000,p.random(-desRange,desRange),p.random(-desRange,desRange));
-    //      bulletTarget.x+p.random(-10,10),bulletTarget.y+p.random(-10,10),bulletTarget.z+p.random(-10,10));
     test.reset();
   }
 
   @Override
   public void displayCam() {
-    //    telescope.display();
-
     p.depth(true);
-    p.rendererEnd();
 
     testC.list.forEach(test-> {
       test.displayCam();
