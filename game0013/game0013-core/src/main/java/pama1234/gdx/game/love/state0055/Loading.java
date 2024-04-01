@@ -13,7 +13,8 @@ public class Loading extends StateEntity0055{
   public void update() {
 
     //    p.state(new BulletTest3DModel(p));
-    p.state(new Duel3D(p));
+    //    p.state(new Duel3D(p));
+    p.state(new CharacterTestDuel(p));
     //    p.state(new CharacterTest(p));
   }
 }
