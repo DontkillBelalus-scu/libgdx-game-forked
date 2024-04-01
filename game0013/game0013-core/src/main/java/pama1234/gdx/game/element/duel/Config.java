@@ -7,14 +7,15 @@ import com.badlogic.gdx.files.FileHandle;
 
 import pama1234.gdx.game.element.duel.server.ServerConfigData;
 import pama1234.gdx.game.element.duel.server.ServerConfigData.ThemeType;
+import pama1234.gdx.game.element.duel.server.util.theme.ServerThemeData;
 import pama1234.gdx.game.element.duel.util.theme.ThemeData;
 import pama1234.gdx.game.ui.element.TextArea;
 
-public class Config {
+public class Config{
   public FileHandle configFile=Gdx.files.local("data/duel/config.yaml");
   public ServerConfigData data;
 
-  public pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData customThemeData;
+  public ServerThemeData customThemeData;
   public String customThemeText;
   public FileHandle themeFile=Gdx.files.local("data/duel/theme.yaml");
   public ThemeData theme;
@@ -24,7 +25,7 @@ public class Config {
   public void initConfig() {
     data=loadConfig();
     customThemeData=loadCustomTheme();
-    if(data.themeType== ThemeType.Custom&&customThemeData!=null) {
+    if(data.themeType==ThemeType.Custom&&customThemeData!=null) {
       try {
         theme=ThemeData.fromData(customThemeData);
       }catch(RuntimeException ex) {
@@ -51,10 +52,10 @@ public class Config {
     out.init();
     return out;
   }
-  public pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData loadCustomTheme() {
+  public ServerThemeData loadCustomTheme() {
     try {
       if(themeFile.exists()) {
-        customThemeData=localization.yaml.loadAs(customThemeText=themeFile.readString("UTF-8"), pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData.class);
+        customThemeData=localization.yaml.loadAs(customThemeText=themeFile.readString("UTF-8"),ServerThemeData.class);
         if(customThemeData!=null) return customThemeData;
       }
     }catch(RuntimeException ex) {
@@ -63,7 +64,7 @@ public class Config {
     return customThemeData;
   }
   public void saveConfig() {
-    pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData themeData;
+    ServerThemeData themeData;
     if(customThemeData==null||customThemeData.data==null) {
       theme.init();
       themeData=theme.toData();
@@ -77,7 +78,7 @@ public class Config {
     updateThemeFromType(themeType,true);
   }
   public void updateThemeFromType(ThemeType themeType,boolean updateText) {
-    pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData tempData=themeType==ThemeType.Custom?customThemeData:new pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData();
+    ServerThemeData tempData=themeType==ThemeType.Custom?customThemeData:new ServerThemeData();
     switch(themeType) {
       case Light: {
         theme.init();

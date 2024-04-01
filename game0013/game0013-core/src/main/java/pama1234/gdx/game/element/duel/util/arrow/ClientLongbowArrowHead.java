@@ -1,6 +1,6 @@
 package pama1234.gdx.game.element.duel.util.arrow;
 
-import pama1234.gdx.game.duel.Duel;
+import pama1234.gdx.game.element.duel.Duel;
 
 public final class ClientLongbowArrowHead extends ClientLongbowArrowComponent{
   public final float halfHeadLength=24;

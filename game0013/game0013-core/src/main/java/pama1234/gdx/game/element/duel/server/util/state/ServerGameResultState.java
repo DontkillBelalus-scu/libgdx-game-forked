@@ -1,14 +1,15 @@
 package pama1234.gdx.game.element.duel.server.util.state;
 
-import pama1234.app.game.server.duel.ServerGameSystem;
-import pama1234.app.game.server.duel.util.Const;
+import pama1234.gdx.game.element.duel.server.ServerGameSystem;
+import pama1234.gdx.game.element.duel.server.util.actor.Actor;
+import pama1234.gdx.game.element.duel.server.util.Const;
 import pama1234.math.UtilMath;
 
 public class ServerGameResultState extends ServerGameSystemState{
   public final int durationFrameCount=UtilMath.floor(Const.IDEAL_FRAME_RATE);
 
   public int winGroupe;
-  public ServerGameResultState(ServerGameSystem system,int winGroupe) {
+  public ServerGameResultState(ServerGameSystem system, int winGroupe) {
     super(system);
     system.stateIndex=ServerGameSystem.result;
     this.winGroupe=winGroupe;

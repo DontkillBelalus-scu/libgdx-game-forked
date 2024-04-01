@@ -1,12 +1,12 @@
 package pama1234.gdx.game.element.duel.server.util.state;
 
-import pama1234.app.game.server.duel.ServerGameSystem;
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.app.game.server.duel.util.actor.AbstractPlayerActor;
-import pama1234.app.game.server.duel.util.actor.Actor;
-import pama1234.app.game.server.duel.util.actor.ActorGroup;
-import pama1234.app.game.server.duel.util.arrow.AbstractArrowActor;
-import pama1234.app.game.server.duel.util.player.ServerPlayerActor;
+import pama1234.gdx.game.element.duel.server.ServerGameSystem;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.server.util.actor.AbstractPlayerActor;
+import pama1234.gdx.game.element.duel.server.util.actor.Actor;
+import pama1234.gdx.game.element.duel.server.util.actor.ActorGroup;
+import pama1234.gdx.game.element.duel.server.util.arrow.AbstractArrowActor;
+import pama1234.gdx.game.element.duel.server.util.player.ServerPlayerActor;
 import pama1234.math.UtilMath;
 
 public class ServerPlayGameState extends ServerGameSystemState{
@@ -68,7 +68,7 @@ public class ServerPlayGameState extends ServerGameSystemState{
     system.duelServer.core.addSquareParticles(arrow.pos.x,arrow.pos.y,10,7,1,5,1);
     group.arrowCenter.remove.add(arrow);
   }
-  public void thrustPlayerActor(Actor referenceActor,ServerPlayerActor targetPlayerActor) {
+  public void thrustPlayerActor(Actor referenceActor, ServerPlayerActor targetPlayerActor) {
     final float relativeAngle=UtilMath.atan2(targetPlayerActor.pos.y-referenceActor.pos.y,targetPlayerActor.pos.x-referenceActor.pos.x);
     final float thrustAngle=relativeAngle+system.duelServer.random(-0.5f*UtilMath.HALF_PI,0.5f*UtilMath.HALF_PI);
     targetPlayerActor.vel.x+=20*UtilMath.cos(thrustAngle);

@@ -1,11 +1,11 @@
 package pama1234.gdx.game.element.duel.util.player;
 
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.app.game.server.duel.util.player.ServerDrawShortbowPlayerActorState;
-import pama1234.app.game.server.duel.util.player.ServerPlayerActor;
-import pama1234.gdx.game.asset.MusicAsset;
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.util.arrow.ClientShortbowArrow;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.asset.MusicAsset;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.server.util.player.ServerDrawShortbowPlayerActorState;
+import pama1234.gdx.game.element.duel.server.util.player.ServerPlayerActor;
+import pama1234.gdx.game.element.duel.util.arrow.ClientShortbowArrow;
 import pama1234.math.UtilMath;
 
 /**
@@ -15,7 +15,7 @@ import pama1234.math.UtilMath;
  * </p>
  * {@link ClientDrawShortbowPlayerActorState}
  */
-public final class ClientDrawShortbowPlayerActorState extends ServerDrawShortbowPlayerActorState{
+public final class ClientDrawShortbowPlayerActorState extends ServerDrawShortbowPlayerActorState {
   public final Duel p;
   public final int fireIntervalFrameCount=UtilMath.floor(Const.IDEAL_FRAME_RATE*0.2f);
   public ClientDrawShortbowPlayerActorState(Duel duel) {

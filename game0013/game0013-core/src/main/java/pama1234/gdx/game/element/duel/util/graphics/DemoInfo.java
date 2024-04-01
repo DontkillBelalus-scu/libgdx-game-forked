@@ -2,14 +2,14 @@ package pama1234.gdx.game.element.duel.util.graphics;
 
 import com.badlogic.gdx.graphics.Texture;
 
-import pama1234.gdx.game.app.app0002.Screen0055;
+import pama1234.gdx.game.element.duel.Duel;
 import pama1234.gdx.util.element.Graphics;
 import pama1234.gdx.util.entity.Entity;
 import pama1234.math.UtilMath;
 
-public class DemoInfo extends Entity<Screen0055>{
+public class DemoInfo extends Entity<Duel>{
   public Graphics text;
-  public DemoInfo(Screen0055 p) {
+  public DemoInfo(Duel p) {
     super(p);
     text=new Graphics(p,576,460);
     text.begin();
@@ -33,7 +33,7 @@ public class DemoInfo extends Entity<Screen0055>{
     else drawText_ch(p,UtilMath.min(p.width,p.height));
     text.end();
   }
-  public static void displayDemo(Screen0055 p) {
+  public static void displayDemo(Duel p) {
     int fu=UtilMath.min(p.width,p.height);
     Texture img=p.demoInfo.text.texture;
     int tf=UtilMath.max(1,(int)(fu/img.getHeight()));
@@ -41,7 +41,7 @@ public class DemoInfo extends Entity<Screen0055>{
     int th=img.getHeight()*tf;
     p.image(img,(p.width-tw)/2f,(p.height-th)/2f,tw,th);
   }
-  public static void drawText_en(Screen0055 p,int fu) {
+  public static void drawText_en(Duel p,int fu) {
     p.fullText("    Z key:",200,180);
     p.fullText("    X key:",200,250);
     p.fullText("Arrow key:",200,345);
@@ -51,7 +51,7 @@ public class DemoInfo extends Entity<Screen0055>{
     p.fullText("- Press Z key to start -",192,430);
     p.fullText("(Click to hide this window)",192,475);
   }
-  public static void drawText_ch(Screen0055 p,int fu) {
+  public static void drawText_ch(Duel p,int fu) {
     p.setTextScale(3);
     p.fullText("几何决斗！",180,20);
     p.setTextScale(1);
@@ -68,7 +68,7 @@ public class DemoInfo extends Entity<Screen0055>{
     p.fullText("由Pama1234移植到安卓版！( https://space.bilibili.com/646050693 )",20,420);
     p.fullText("原型版本，视觉BUG很多，敬请关注此开源项目！会更新联机版！",20,440);
   }
-  public static void drawText_ch_android(Screen0055 p,int fu) {
+  public static void drawText_ch_android(Duel p,int fu) {
     p.setTextScale(3);
     p.fullText("几何决斗！",180,20);
     p.setTextScale(2);

@@ -2,7 +2,7 @@ package pama1234.gdx.game.element.duel.util.ai.nnet;
 
 import java.util.ArrayList;
 
-import pama1234.gdx.game.duel.Duel;
+import pama1234.gdx.game.element.duel.Duel;
 import pama1234.math.UtilMath;
 import pama1234.util.neat.raimannma.architecture.EvolveOptions;
 import pama1234.util.neat.raimannma.architecture.FloatBlock;
@@ -54,7 +54,7 @@ public class NeatCenter extends Center<NetworkGroup>{
   }
   public static class NeatModule{
     public NEAT neat;
-    public NeatModule(int inputSize,int outputSize,EvolveOptions options) {
+    public NeatModule(int inputSize, int outputSize, EvolveOptions options) {
       neat=new NEAT(inputSize,outputSize,options);
     }
   }
@@ -93,7 +93,7 @@ public class NeatCenter extends Center<NetworkGroup>{
         float[] data=genome.activate(new float[logicSize],new float[outputSize]);
         return genome.floatData!=null
           ?(genome.floatData[0]<0.1f
-            ? ComputerLifeEngine.fireType(data[ComputerLifeEngine.firePos]/4f*0.4f)+
+            ?ComputerLifeEngine.fireType(data[ComputerLifeEngine.firePos]/4f*0.4f)+
               (UtilMath.abs(data[ComputerLifeEngine.magPos])>1/16f?0.4f:0)+
               genome.floatData[1]*0.1f
             :genome.floatData[0])

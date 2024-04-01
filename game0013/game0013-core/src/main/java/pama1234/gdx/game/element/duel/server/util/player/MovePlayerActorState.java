@@ -1,8 +1,8 @@
 package pama1234.gdx.game.element.duel.server.util.player;
 
-import pama1234.app.game.server.duel.util.input.AbstractInputDevice;
+import pama1234.gdx.game.element.duel.server.util.input.AbstractInputDevice;
 
-public final class MovePlayerActorState extends PlayerActorState {
+public final class MovePlayerActorState extends PlayerActorState{
   public PlayerActorState drawShortbowState,drawLongbowState,doTeleportState;
   @Override
   public void act(ServerPlayerActor parentActor) {

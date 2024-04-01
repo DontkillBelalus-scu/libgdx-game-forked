@@ -1,9 +1,9 @@
 package pama1234.gdx.game.element.duel.server.util.player;
 
-import pama1234.app.game.server.duel.DuelServer;
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.app.game.server.duel.util.arrow.ServerShortbowArrow;
-import pama1234.app.game.server.duel.util.input.AbstractInputDevice;
+import pama1234.gdx.game.element.duel.server.DuelServer;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.server.util.arrow.ServerShortbowArrow;
+import pama1234.gdx.game.element.duel.server.util.input.AbstractInputDevice;
 import pama1234.math.UtilMath;
 
 public class ServerDrawShortbowPlayerActorState extends DrawBowPlayerActorState {

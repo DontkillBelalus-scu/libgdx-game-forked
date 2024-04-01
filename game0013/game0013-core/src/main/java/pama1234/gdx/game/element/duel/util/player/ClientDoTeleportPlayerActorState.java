@@ -1,10 +1,10 @@
 package pama1234.gdx.game.element.duel.util.player;
 
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.app.game.server.duel.util.player.ServerDoTeleportPlayerActorState;
-import pama1234.app.game.server.duel.util.player.ServerPlayerActor;
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.util.graphics.Particle;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.server.util.player.ServerDoTeleportPlayerActorState;
+import pama1234.gdx.game.element.duel.server.util.player.ServerPlayerActor;
+import pama1234.gdx.game.element.duel.util.graphics.Particle;
 import pama1234.math.UtilMath;
 
 /**
@@ -14,7 +14,7 @@ import pama1234.math.UtilMath;
  * </p>
  * {@link ClientDrawShortbowPlayerActorState}
  */
-public class ClientDoTeleportPlayerActorState extends ServerDoTeleportPlayerActorState{
+public class ClientDoTeleportPlayerActorState extends ServerDoTeleportPlayerActorState {
   public final Duel p;
   public ClientDoTeleportPlayerActorState(Duel p) {
     super(null);
@@ -42,7 +42,7 @@ public class ClientDoTeleportPlayerActorState extends ServerDoTeleportPlayerActo
     if(hasCompletedTeleportCharge) {
       p.stroke(p.theme().teleportEffect);
       p.translate(parentActor.pos.x-desX,parentActor.pos.y-desY);
-      p.rotate(p.frameCount/Const.IDEAL_FRAME_RATE%UtilMath.PI);
+      p.rotate(p.frameCount/ Const.IDEAL_FRAME_RATE%UtilMath.PI);
       p.rect(-l/2f,-l/2f,l,l);
     }
     super.displayEffect(parentActor);

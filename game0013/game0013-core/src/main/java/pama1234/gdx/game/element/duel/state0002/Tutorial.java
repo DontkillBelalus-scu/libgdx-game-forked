@@ -1,9 +1,9 @@
 package pama1234.gdx.game.element.duel.state0002;
 
 import pama1234.Tools;
-import pama1234.gdx.game.duel.ClientGameSystem;
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.State0002Util.StateEntity0002;
+import pama1234.gdx.game.element.duel.ClientGameSystem;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.love.state0055.State0055Util.StateEntity0055;
 import pama1234.gdx.game.ui.element.TextButton;
 import pama1234.math.UtilMath;
 
@@ -17,21 +17,21 @@ public class Tutorial extends Game{
   public int longbowCount;
 
   public TextButton<?> skipButton;
-  public Tutorial(Duel p,int id) {
+  public Tutorial(Duel p, int id) {
     super(p,id);
     skipButton=new TextButton<>(p,self->self.text="跳过",()->true,true).allTextButtonEvent(self-> {},self-> {},self-> {
-      p.state(p.stateCenter.startMenu);
+      p.state(p.stateCenter.duel_startMenu);
       p.config.data.firstPlay=false;
     }).rectAutoWidth(()->(int)(p.width-p.bu*2.5f),()->(int)(p.bu*1.5f),()->p.bu-p.pus).mouseLimit(true);
 
   }
   @Override
-  public void from(StateEntity0002 in) {
+  public void from(StateEntity0055 in) {
     super.from(in);
     p.centerScreen.add.add(skipButton);
   }
   @Override
-  public void to(StateEntity0002 in) {
+  public void to(StateEntity0055 in) {
     super.to(in);
     p.centerScreen.remove.add(skipButton);
   }

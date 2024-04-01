@@ -1,7 +1,8 @@
 package pama1234.gdx.game.element.duel.util.graphics;
 
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.gdx.game.duel.Duel;
+
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.Const;
 
 public final class HorizontalLine extends BackgroundLine {
   public final Duel duel;

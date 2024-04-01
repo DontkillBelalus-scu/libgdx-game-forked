@@ -1,9 +1,9 @@
 package pama1234.gdx.game.element.duel.server.util.player;
 
-import pama1234.app.game.server.duel.util.Const;
+import pama1234.gdx.game.element.duel.server.util.Const;
 import pama1234.math.UtilMath;
 
-public class ServerDamagedPlayerActorState extends PlayerActorState {
+public class ServerDamagedPlayerActorState extends PlayerActorState{
   public final int durationFrameCount=UtilMath.floor(0.75f*Const.IDEAL_FRAME_RATE);
   public PlayerActorState moveState;
   @Override

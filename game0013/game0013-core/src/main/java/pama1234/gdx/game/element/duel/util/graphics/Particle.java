@@ -3,15 +3,15 @@ package pama1234.gdx.game.element.duel.util.graphics;
 import com.badlogic.gdx.graphics.Color;
 
 import pama1234.Tools;
-import pama1234.app.game.server.duel.util.Body;
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.app.game.server.duel.util.ObjectPool;
-import pama1234.app.game.server.duel.util.Poolable;
-import pama1234.gdx.game.duel.ClientGameSystem;
-import pama1234.gdx.game.duel.Duel;
+import pama1234.gdx.game.element.duel.ClientGameSystem;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.Body;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.server.util.ObjectPool;
+import pama1234.gdx.game.element.duel.server.util.Poolable;
 import pama1234.math.UtilMath;
 
-public final class Particle extends Body implements Poolable<Particle>{
+public final class Particle extends Body implements Poolable<Particle> {
   public static final int dot=0,square=1,line=2,ring=3;
   public static float f=0.98f;
   public Duel duel;
@@ -80,7 +80,7 @@ public final class Particle extends Body implements Poolable<Particle>{
     }
     switch(particleTypeNumber) {
       case square:
-        rotationAngle+=1.5f*UtilMath.PI2/Const.IDEAL_FRAME_RATE;
+        rotationAngle+=1.5f*UtilMath.PI2/ Const.IDEAL_FRAME_RATE;
         break;
       default:
         break;

@@ -1,8 +1,8 @@
 package pama1234.gdx.game.element.duel.server.util.player;
 
-import pama1234.app.game.server.duel.util.input.ServerInputData;
+import pama1234.gdx.game.element.duel.server.util.input.ServerInputData;
 
-public class ServerHumanPlayerEngine extends PlayerEngine {
+public class ServerHumanPlayerEngine extends PlayerEngine{
   public final ServerInputData currentInput;
   public ServerHumanPlayerEngine(ServerInputData keyInput) {
     currentInput=keyInput;

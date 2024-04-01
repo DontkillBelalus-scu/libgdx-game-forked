@@ -1,7 +1,5 @@
 package pama1234.gdx.game.element.actor;
 
-import static pama1234.math.UtilMath.abs;
-
 import pama1234.gdx.game.app.app0002.Screen0055;
 import pama1234.gdx.game.element.OrientedEntity3D;
 import pama1234.gdx.game.util.ui.ColorUtil;

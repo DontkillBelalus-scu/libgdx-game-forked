@@ -1,12 +1,12 @@
 package pama1234.gdx.game.element.duel.util.player;
 
-import pama1234.app.game.server.duel.util.player.ServerDrawLongbowPlayerActorState;
-import pama1234.app.game.server.duel.util.player.ServerPlayerActor;
-import pama1234.gdx.game.asset.MusicAsset;
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.util.arrow.ClientLongbowArrowHead;
-import pama1234.gdx.game.duel.util.arrow.ClientLongbowArrowShaft;
-import pama1234.gdx.game.duel.util.graphics.Particle;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.asset.MusicAsset;
+import pama1234.gdx.game.element.duel.server.util.player.ServerDrawLongbowPlayerActorState;
+import pama1234.gdx.game.element.duel.server.util.player.ServerPlayerActor;
+import pama1234.gdx.game.element.duel.util.arrow.ClientLongbowArrowHead;
+import pama1234.gdx.game.element.duel.util.arrow.ClientLongbowArrowShaft;
+import pama1234.gdx.game.element.duel.util.graphics.Particle;
 import pama1234.math.UtilMath;
 
 /**
@@ -16,7 +16,7 @@ import pama1234.math.UtilMath;
  * </p>
  * {@link ClientDrawShortbowPlayerActorState}
  */
-public final class ClientDrawLongbowPlayerActorState extends ServerDrawLongbowPlayerActorState{
+public final class ClientDrawLongbowPlayerActorState extends ServerDrawLongbowPlayerActorState {
   public final Duel p;
   // public boolean playAudio;
   public ClientDrawLongbowPlayerActorState(Duel p) {

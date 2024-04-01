@@ -1,19 +1,21 @@
 package pama1234.gdx.game.element.duel.state0002;
 
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.State0002Util.StateEntity0002;
-import pama1234.gdx.game.duel.util.input.UiGenerator;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.util.input.UiGenerator;
+import pama1234.gdx.game.love.state0055.State0055Util.StateEntity0055;
 import pama1234.gdx.game.ui.element.TextButton;
 import pama1234.gdx.game.ui.element.TextButtonCam;
-import pama1234.gdx.util.cam.CameraController2D;
-import pama1234.gdx.util.ui.editor.TextEditor;
+import pama1234.gdx.util.ui.editor.TextEditor3D;
 
-public class Settings extends StateEntity0002{
-  public TextEditor<?>[] textEditors;
+public class Settings extends StateEntity0055{
+  public Duel p;
+
+  public TextEditor3D<?>[] textEditors;
   public TextButton<?>[] buttons;
   public TextButtonCam<?>[] camButtons;
   public Settings(Duel p,int id) {
-    super(p,id);
+    super(p);
+    this.p=p;
     init();
   }
   @Override
@@ -23,12 +25,12 @@ public class Settings extends StateEntity0002{
     camButtons=UiGenerator.genButtons_0003(p);
   }
   @Override
-  public void from(StateEntity0002 in) {
-    p.camStrokeWeight=()->p.cam2d.pixelPerfect==CameraController2D.SMOOTH?p.cam2d.scale.pos:p.u/16*p.cam2d.scale.pos;
-    p.cam2d.pixelPerfect=CameraController2D.SMOOTH;
-    p.cam2d.scale.des=2;
-    p.cam2d.point.des.y=40;
-    for(TextEditor<?> i:textEditors) {
+  public void from(StateEntity0055 in) {
+    //    p.camStrokeWeight=()->p.cam2d.pixelPerfect==CameraController2D.SMOOTH?p.cam2d.scale.pos:p.u/16*p.cam2d.scale.pos;
+    //    p.cam2d.pixelPerfect=CameraController2D.SMOOTH;
+    //    p.cam2d.scale.des=2;
+    //    p.cam2d.point.des.y=40;
+    for(TextEditor3D<?> i:textEditors) {
       p.centerCam.add.add(i);
       i.addTo(p.camStage);
     }
@@ -36,10 +38,10 @@ public class Settings extends StateEntity0002{
     for(TextButtonCam<?> i:camButtons) p.centerCam.add.add(i);
   }
   @Override
-  public void to(StateEntity0002 in) {
-    p.camStrokeWeight=()->p.u/16*p.cam2d.scale.pos;
-    p.cam2d.pixelPerfect=CameraController2D.NONE;
-    for(TextEditor<?> i:textEditors) {
+  public void to(StateEntity0055 in) {
+    //    p.camStrokeWeight=()->p.u/16*p.cam2d.scale.pos;
+    //    p.cam2d.pixelPerfect=CameraController2D.NONE;
+    for(TextEditor3D<?> i:textEditors) {
       p.centerCam.remove.add(i);
       i.removeFrom(p.camStage);
     }

@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import pama1234.app.game.server.duel.util.ObjectPool;
-import pama1234.gdx.game.duel.ClientGameSystem;
-import pama1234.gdx.game.duel.Duel;
+import pama1234.gdx.game.element.duel.ClientGameSystem;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.ObjectPool;
 
 public final class ParticleSet{
   public final Duel p;

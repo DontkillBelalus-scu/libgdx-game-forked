@@ -6,14 +6,14 @@ eclipse.project.name = appName + '0013-server'
 
 dependencies {
   implementation("$pama1234RepoLocation:server-framework:$pama1234PublishVersion") {
-    // exclude group: "com.esotericsoftware", module: "reflectasm"
   }
 
-  // api project(":framework0001:framework0001-yaml")
   // TODO 框架端删除netty的直接依赖打包
   api ("$pama1234RepoLocation:framework-netty:$pama1234PublishVersion") {
     // exclude group: "io.netty", module: "*"
   }
+
+  api ("$pama1234RepoLocation:framework-neat:$pama1234PublishVersion")
   
   api "javax.vecmath:vecmath:$vecmathVersion"
   api "com.esotericsoftware:kryo:$kryoVersion"

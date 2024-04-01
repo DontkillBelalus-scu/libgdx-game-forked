@@ -1,7 +1,5 @@
 package pama1234.gdx.game.element.duel;
 
-import com.badlogic.gdx.Game;
-
 import pama1234.gdx.game.element.duel.server.ServerConfigData;
 import pama1234.gdx.game.element.duel.server.ServerGameSystem;
 import pama1234.gdx.game.element.duel.server.util.Const;
@@ -10,6 +8,7 @@ import pama1234.gdx.game.element.duel.server.util.player.DrawBowPlayerActorState
 import pama1234.gdx.game.element.duel.server.util.player.MovePlayerActorState;
 import pama1234.gdx.game.element.duel.server.util.player.PlayerEngine;
 import pama1234.gdx.game.element.duel.server.util.player.ServerDoTeleportPlayerActorState;
+import pama1234.gdx.game.element.duel.state0002.Game;
 import pama1234.gdx.game.element.duel.util.actor.ClientPlayerActor;
 import pama1234.gdx.game.element.duel.util.ai.nnet.ComputerLifeEngine;
 import pama1234.gdx.game.element.duel.util.graphics.*;

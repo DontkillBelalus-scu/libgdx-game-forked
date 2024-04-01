@@ -1,12 +1,14 @@
 package pama1234.gdx.game.love.state0055;
 
 import pama1234.gdx.game.app.app0002.Screen0055;
+import pama1234.gdx.game.element.duel.state0002.Game;
+import pama1234.gdx.game.element.duel.state0002.StartMenu;
 import pama1234.gdx.util.listener.StateChanger;
 import pama1234.gdx.util.listener.StateEntityListener;
 import pama1234.gdx.util.wrapper.StateCenter;
 import pama1234.gdx.util.wrapper.StateEntityBase;
 
-public class State0055Util {
+public class State0055Util{
 
   public static void loadState0055(Screen0055 in,StateCenter0055 center) {
     center.list.add(center.firstRun=new FirstRun(in));
@@ -14,8 +16,8 @@ public class State0055Util {
     center.list.add(center.mainMenu=new MainMenu(in));
     center.list.add(center.settings=new Settings(in));
 
-//    center.list.add(center.bulletTest =new BulletTest(in));
-//    center.list.add(center.bulletTest =new BulletTest3D(in));
+    //    center.list.add(center.bulletTest =new BulletTest(in));
+    //    center.list.add(center.bulletTest =new BulletTest3D(in));
   }
   public static abstract class StateEntity0055 extends StateEntityBase<Screen0055,StateEntityListener0055,StateEntity0055> implements StateEntityListener0055{
     public StateEntity0055(Screen0055 p) {
@@ -32,7 +34,12 @@ public class State0055Util {
     public MainMenu mainMenu;
     public Settings settings;
 
-//    public BulletTest bulletTest;
+    public StartMenu duel_startMenu;
+    public Game duel_game;
+    public pama1234.gdx.game.element.duel.state0002.Settings duel_settings;
+    public pama1234.gdx.game.element.duel.state0002.Tutorial duel_tutorial;
+
+    //    public BulletTest bulletTest;
     public StateCenter0055(Screen0055 p) {
       super(p);
     }

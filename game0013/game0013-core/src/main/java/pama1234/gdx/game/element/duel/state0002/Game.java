@@ -17,6 +17,8 @@ import pama1234.gdx.util.info.MouseInfo;
 import static pama1234.gdx.game.element.duel.server.ServerConfigData.*;
 
 public class Game extends StateEntity0055 {
+  public Duel p;
+
   public TextButton<?>[] buttons;
   public ClientInputData currentInput;
   public ClientGameSystem core;
@@ -26,10 +28,12 @@ public class Game extends StateEntity0055 {
   // public InputDataProto.InputData.Builder inputDataBuilder;
   public Game(Duel p, int id, boolean doInit) {
     super(p);
+    this.p=p;
     if(doInit) init();
   }
   public Game(Duel p,int id) {
     super(p);
+    this.p=p;
     init();
   }
   @Override
@@ -145,16 +149,16 @@ public class Game extends StateEntity0055 {
     currentInput.keyReleased(p,key,keyCode);
   }
   @Override
-  public void from(StateEntity0002 in) {
+  public void from(StateEntity0055 in) {
     paused=false;
     if(p.config.data.mode==game) {
-      p.cam2d.activeDrag=false;
-      p.cam2d.activeScrollZoom=p.cam2d.activeTouchZoom=false;
+//      p.cam3d.activeDrag=false;
+//      p.cam3d.activeScrollZoom=p.cam2d.activeTouchZoom=false;
 
       if(p.config.data.orientation==1) p.cam.point.des.set(p.canvasSideLength/2f,p.canvasSideLength/1.5f);
       else p.cam.point.des.set(p.canvasSideLength/2f,p.canvasSideLength/2f);
       p.cam.point.pos.set(p.cam.point.des);
-      p.cam2d.scale.pos=p.cam2d.scale.des=p.isAndroid?0.25f:1;
+//      p.cam3d.scale.pos=p.cam2d.scale.des=p.isAndroid?0.25f:1;
     }
     if(actrl!=null) {
       actrl.addAll();
@@ -164,11 +168,11 @@ public class Game extends StateEntity0055 {
     p.core=()->core;
   }
   @Override
-  public void to(StateEntity0002 in) {
+  public void to(StateEntity0055 in) {
     paused=true;
     if(p.config.data.mode==game) {
-      p.cam2d.activeDrag=true;
-      p.cam2d.activeScrollZoom=p.cam2d.activeTouchZoom=true;
+//      p.cam3d.activeDrag=true;
+//      p.cam3d.activeScrollZoom=p.cam2d.activeTouchZoom=true;
     }
     if(actrl!=null) {
       actrl.removeAll();

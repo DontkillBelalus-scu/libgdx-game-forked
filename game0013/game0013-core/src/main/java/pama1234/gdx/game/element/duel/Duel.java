@@ -52,7 +52,7 @@ import space.earlygrey.shapedrawer.CapType;
  *
  * The font "Unifont" https://unifoundry.com/unifont/ is part of the GNU Project.
  */
-public class Duel extends Screen0055 {
+public class Duel extends Screen0055{
 
   public static final Serialization localization=new Serialization();
 
@@ -86,8 +86,8 @@ public class Duel extends Screen0055 {
     initConfig();
     if(isAndroid) Pama.mobile.orientation(config.data.orientation);
     if(config.data.server==null) config.data.server=new ServerAttr("127.0.0.1",12348);
-    if(config.data.themeType==null) config.data.themeType= ThemeType.Light;
-    if(config.data.gameMode== GameMode.OnLine) {
+    if(config.data.themeType==null) config.data.themeType=ThemeType.Light;
+    if(config.data.gameMode==GameMode.OnLine) {
       SocketHints socketHints=new SocketHints();
       socketHints.connectTimeout=5000;
       socketHints.socketTimeout=5000;
@@ -119,12 +119,12 @@ public class Duel extends Screen0055 {
     stateCenter=new StateCenter0055(this);
     State0055Util.loadState0055(this,stateCenter);
     if(debug) {
-//      stateCenter.debug=new DebugStateEntitys(this);
-//      State0055Util.loadState0003Test(this,stateCenter.debug);
+      //      stateCenter.debug=new DebugStateEntitys(this);
+      //      State0055Util.loadState0003Test(this,stateCenter.debug);
     }
-    state(stateCenter.startMenu);
+    state(stateCenter.duel_startMenu);
 
-    config.themeConfigTextArea=stateCenter.settings.textEditors[0].textArea;
+    config.themeConfigTextArea=stateCenter.duel_settings.textEditors[0].textArea;
     TextUtil.used=TextUtil.gen_ch(this::textWidthNoScale);
 
     if(config.data.mode==neat) neatE=new NeatEntity(this,game(),true);
@@ -132,7 +132,7 @@ public class Duel extends Screen0055 {
     backgroundColor(theme().background);
     strokeCap(CapType.NONE);
     setTextColor(theme().text);
-//    textColor(theme().text);
+    //    textColor(theme().text);
     demoInfo=new DemoInfo(this);
 
     setupCamera();
@@ -140,18 +140,18 @@ public class Duel extends Screen0055 {
   public void setupCamera() {
     cam.point.des.set(canvasSideLength/2f,canvasSideLength/2f);
     cam.point.pos.set(cam.point.des);
-//    if(config.data.mode==neat) {
-//      cam3d.minScale=1/8f;
-//      cam3d.scaleUnit=1/8f;
-//      cam3d.scale.pos=cam2d.scale.des=(isAndroid?0.25f:1)*0.6f;
-//    }else {
-//      if(isAndroid) {
-//        cam3d.minScale=1/2f;
-//        cam3d.scale.pos=cam2d.scale.des=0.25f;
-//      }else {
-//        cam3d.minScale=2f;
-//      }
-//    }
+    //    if(config.data.mode==neat) {
+    //      cam3d.minScale=1/8f;
+    //      cam3d.scaleUnit=1/8f;
+    //      cam3d.scale.pos=cam2d.scale.des=(isAndroid?0.25f:1)*0.6f;
+    //    }else {
+    //      if(isAndroid) {
+    //        cam3d.minScale=1/2f;
+    //        cam3d.scale.pos=cam2d.scale.des=0.25f;
+    //      }else {
+    //        cam3d.minScale=2f;
+    //      }
+    //    }
   }
   @Override
   public void pause() {

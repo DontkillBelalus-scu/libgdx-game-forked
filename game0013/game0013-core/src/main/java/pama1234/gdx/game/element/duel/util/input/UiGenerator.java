@@ -15,7 +15,7 @@ import pama1234.gdx.game.ui.element.TextField;
 import pama1234.gdx.launcher.MainApp;
 import pama1234.gdx.util.android.AndroidCtrlBase;
 import pama1234.gdx.util.ui.UiGeneratorBase;
-import pama1234.gdx.util.ui.editor.TextEditor;
+import pama1234.gdx.util.ui.editor.TextEditor3D;
 
 public class UiGenerator extends UiGeneratorBase{
   public static TextButton<?>[] genButtons_0001(Duel p) {
@@ -36,47 +36,47 @@ public class UiGenerator extends UiGeneratorBase{
   public static TextButton<?>[] genButtons_0002(Duel p) {
     return new TextButton[] {
       new TextButton<>(p,true,()->true,self-> {},self-> {
-        if(p.state==p.stateCenter.game) p.state(p.stateCenter.settings);
-        else p.state(p.stateCenter.game);
+        if(p.state==p.stateCenter.duel_game) p.state(p.stateCenter.settings);
+        else p.state(p.stateCenter.duel_game);
         self.updateText();
-      },self-> {},self->self.text=p.state==p.stateCenter.game?"设置":"游戏",p::getButtonUnitLength,()->p.width-p.bu*2.5f,()->p.bu*0.5f,()->p.bu-p.pus).mouseLimit(false),
+      },self-> {},self->self.text=p.state==p.stateCenter.duel_game?"设置":"游戏",p::getButtonUnitLength,()->p.width-p.bu*2.5f,()->p.bu*0.5f,()->p.bu-p.pus).mouseLimit(false),
     };
   }
   public static String getSkinText(Duel p) {
     return p.config.customThemeData==null?"无可加载的皮肤配置，重启游戏试试":Duel.localization.yaml.dumpAsMap(p.config.customThemeData.data);
   }
   public static String getServerAttrText(Duel p) {
-    return p.config.data.server==null?"无可加载的联机配置，重启游戏试试": Duel.localization.yaml.dumpAsMap(p.config.data.server);
+    return p.config.data.server==null?"无可加载的联机配置，重启游戏试试":Duel.localization.yaml.dumpAsMap(p.config.data.server);
   }
-  public static TextEditor<?>[] genUi_0002(Duel p) {
-    TextEditor<?>[] out=new TextEditor[] {new TextEditor<>(p,p.theme().stroke,-160,-160,320,480) {
+  public static TextEditor3D<?>[] genUi_0002(Duel duel) {
+    TextEditor3D<?>[] out=new TextEditor3D[] {new TextEditor3D<>(duel,duel.theme().stroke,-160,-160,320,480) {
       @Override
       public void display() {
         super.display();
-        p.textColor(p.theme().text);
+        p.textColor(duel.theme().text);
         p.text("皮肤设置",rect.x(),rect.y()-20);
       }
 
       @Override
       public void keyboardHidden(TextField in) {
         if(in==textArea) try {
-          p.config.customThemeData.data=Duel.localization.yaml.load(textArea.getText());
-          p.theme(ThemeData.fromData(p.config.customThemeData));
+          duel.config.customThemeData.data=Duel.localization.yaml.load(textArea.getText());
+          duel.theme(ThemeData.fromData(duel.config.customThemeData));
         }catch(RuntimeException e) {
-          textArea.setText(getSkinText(p));
+          textArea.setText(getSkinText(duel));
         }
       }
-    },new TextEditor<>(p,p.theme().stroke,180,-160,320,60) {
+    },new TextEditor3D<>(duel,duel.theme().stroke,180,-160,320,60) {
       @Override
       public void keyboardHidden(TextField in) {
-        if(in==textArea) p.config.data.server=Duel.localization.yaml.loadAs(in.getText(), ServerAttr.class);
+        if(in==textArea) duel.config.data.server=Duel.localization.yaml.loadAs(in.getText(),ServerAttr.class);
       }
     }};
-    out[0].textArea.setText(getSkinText(p));
+    out[0].textArea.setText(getSkinText(duel));
     out[0].textArea.setMessageText("皮肤设置");
-    out[1].textArea.setText(getServerAttrText(p));
+    out[1].textArea.setText(getServerAttrText(duel));
     out[1].textArea.setMessageText("联机设置");
-    return p.debug?out:new TextEditor[] {out[0]};
+    return duel.debug?out:new TextEditor3D[] {out[0]};
   }
   public static TextButtonCam<?>[] genButtons_0003(Duel p) {
     return new TextButtonCam[] {
@@ -95,8 +95,8 @@ public class UiGenerator extends UiGeneratorBase{
         .allTextButtonEvent(self-> {},self-> {},self-> {
           p.config.data.orientation=(p.config.data.orientation+1)%2;
           if(p.isAndroid) {
-            if(p.config.data.orientation==1) p.stateCenter.game.actrl.activeCondition=AndroidCtrlBase.portraitCondition;
-            else p.stateCenter.game.actrl.activeCondition=AndroidCtrlBase.landscapeCondition;
+            if(p.config.data.orientation==1) p.stateCenter.duel_game.actrl.activeCondition=AndroidCtrlBase.portraitCondition;
+            else p.stateCenter.duel_game.actrl.activeCondition=AndroidCtrlBase.landscapeCondition;
             Pama.mobile.orientation(p.config.data.orientation);
           }
           self.updateText();
@@ -136,8 +136,8 @@ public class UiGenerator extends UiGeneratorBase{
         // }
         if(p.config.data.firstPlay) {
           // p.config.data.firstPlay=false;
-          p.state(p.stateCenter.tutorial);
-        }else p.state(p.stateCenter.game);
+          p.state(p.stateCenter.duel_tutorial);
+        }else p.state(p.stateCenter.duel_game);
       },self->self.text="开始游戏",()->p.bu,()->(int)((p.width-p.textWidth("开始游戏"))/2f-p.pu/2),()->(int)(p.height*0.45f)),
       new TextButton<>(p,true,()->true,self-> {},self-> {},self-> {
         p.state(p.stateCenter.settings);
@@ -146,7 +146,7 @@ public class UiGenerator extends UiGeneratorBase{
     if(p.debug) {
       out=Tools.concat(out,new TextButton[] {
         new TextButton<>(p,true,()->true,self-> {},self-> {},self-> {
-          p.state(p.stateCenter.debug.gamePrototype);
+          //          p.state(p.stateCenter.debug.gamePrototype);
         },self->self.text="原型测试",()->p.bu,()->(int)((p.width-p.textWidth("原型测试"))/2f-p.pu/2),()->(int)(p.height*0.45f+p.bu*2.4f)),});
     }
     return out;
@@ -160,7 +160,7 @@ public class UiGenerator extends UiGeneratorBase{
   public static TextButton<?>[] genButtons_0005(Duel p) {
     return new TextButton[] {
       new TextButton<>(p,self->self.text="返回",()->true,true).allTextButtonEvent(self-> {},self-> {},self-> {
-        p.state(p.stateCenter.startMenu);
+        p.state(p.stateCenter.duel_startMenu);
       }).rectAutoWidth(()->(int)(p.width-p.bu*2.5f),()->(int)(p.bu*0.5f),()->p.bu-p.pus).mouseLimit(true),
     };
   }

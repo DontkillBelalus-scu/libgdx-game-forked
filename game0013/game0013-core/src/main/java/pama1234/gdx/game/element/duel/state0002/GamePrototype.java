@@ -1,8 +1,8 @@
 package pama1234.gdx.game.element.duel.state0002;
 
 import pama1234.Tools;
-import pama1234.gdx.game.duel.ClientGameSystem;
-import pama1234.gdx.game.duel.Duel;
+import pama1234.gdx.game.element.duel.ClientGameSystem;
+import pama1234.gdx.game.element.duel.Duel;
 import pama1234.math.UtilMath;
 
 public class GamePrototype extends Game{
@@ -12,7 +12,7 @@ public class GamePrototype extends Game{
   public int longbowConst=3;
   public int shortbowCount;
   public int longbowCount;
-  public GamePrototype(Duel p,int id) {
+  public GamePrototype(Duel p, int id) {
     super(p,id);
   }
   @Override

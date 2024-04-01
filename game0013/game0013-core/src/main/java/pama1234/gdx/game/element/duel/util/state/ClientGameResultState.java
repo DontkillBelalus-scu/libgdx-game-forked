@@ -1,12 +1,12 @@
 package pama1234.gdx.game.element.duel.util.state;
 
-import pama1234.app.game.server.duel.ServerGameSystem;
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.gdx.game.duel.ClientGameSystem;
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.TextUtil;
-import pama1234.gdx.game.duel.TextUtil.TextWithWidth;
-import pama1234.gdx.game.state.state0002.Game;
+import pama1234.gdx.game.element.duel.ClientGameSystem;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.TextUtil;
+import pama1234.gdx.game.element.duel.TextUtil.TextWithWidth;
+import pama1234.gdx.game.element.duel.server.ServerGameSystem;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.state0002.Game;
 import pama1234.math.UtilMath;
 
 public final class ClientGameResultState extends ClientGameSystemState {
@@ -14,9 +14,9 @@ public final class ClientGameResultState extends ClientGameSystemState {
   public final int durationFrameCount=UtilMath.floor(Const.IDEAL_FRAME_RATE);
 
   public int winGroupe;
-  public ClientGameResultState(Duel duel,ClientGameSystem system,int winGroupe,TextWithWidth msg) {
+  public ClientGameResultState(Duel duel, ClientGameSystem system, int winGroupe, TextWithWidth msg) {
     super(duel,system);
-    system.stateIndex=ServerGameSystem.result;
+    system.stateIndex= ServerGameSystem.result;
     this.winGroupe=winGroupe;
     resultMessage=msg;
   }

@@ -4,18 +4,19 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 import pama1234.gdx.game.app.app0002.Screen0055;
+import pama1234.gdx.game.element.duel.Duel;
 import pama1234.gdx.game.element.duel.server.util.Const;
 import pama1234.gdx.game.element.duel.server.util.actor.AbstractPlayerActor;
 import pama1234.gdx.game.element.duel.server.util.ai.neat.AbstractFisheyeVision;
 import pama1234.gdx.util.element.Graphics;
 
 public class ClientFisheyeVision extends AbstractFisheyeVision {
-  public Screen0055 p;
+  public Duel p;
   public ShaderProgram shader;
   public Color backgroundColor;
   public Graphics graphics;
 
-  public ClientFisheyeVision(Screen0055 duel, ShaderProgram shader, Graphics graphics) {
+  public ClientFisheyeVision(Duel duel, ShaderProgram shader, Graphics graphics) {
     this.p=duel;
     this.shader=shader;
     this.graphics=graphics;

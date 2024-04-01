@@ -6,6 +6,7 @@ import pama1234.gdx.game.element.duel.TextUtil;
 import pama1234.gdx.game.element.duel.server.ServerGameSystem;
 import pama1234.gdx.game.element.duel.server.util.Const;
 import pama1234.gdx.game.element.duel.server.util.actor.AbstractPlayerActor;
+import pama1234.gdx.game.element.duel.server.util.actor.Actor;
 import pama1234.gdx.game.element.duel.server.util.actor.ActorGroup;
 import pama1234.gdx.game.element.duel.server.util.arrow.AbstractArrowActor;
 import pama1234.gdx.game.element.duel.util.actor.ClientPlayerActor;
@@ -87,7 +88,7 @@ public final class ClientPlayGameState extends ClientGameSystemState{
     p.core().addSquareParticles(arrow.pos.x,arrow.pos.y,10,7,1,5,1);
     group.arrowCenter.remove.add(arrow);
   }
-  public void thrustPlayerActor(Actor referenceActor,ClientPlayerActor targetPlayerActor) {
+  public void thrustPlayerActor(Actor referenceActor, ClientPlayerActor targetPlayerActor) {
     final float relativeAngle=UtilMath.atan2(targetPlayerActor.pos.y-referenceActor.pos.y,targetPlayerActor.pos.x-referenceActor.pos.x);
     final float thrustAngle=relativeAngle+p.random(-0.5f*UtilMath.HALF_PI,0.5f*UtilMath.HALF_PI);
     targetPlayerActor.vel.x+=20*UtilMath.cos(thrustAngle);

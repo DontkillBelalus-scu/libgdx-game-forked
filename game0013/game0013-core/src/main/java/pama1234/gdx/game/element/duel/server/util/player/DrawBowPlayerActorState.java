@@ -1,6 +1,6 @@
 package pama1234.gdx.game.element.duel.server.util.player;
 
-import pama1234.app.game.server.duel.util.input.AbstractInputDevice;
+import pama1234.gdx.game.element.duel.server.util.input.AbstractInputDevice;
 
 /**
  * {@link ServerDoTeleportPlayerActorState}
@@ -9,7 +9,7 @@ import pama1234.app.game.server.duel.util.input.AbstractInputDevice;
  * </p>
  * {@link ServerDrawShortbowPlayerActorState}
  */
-public abstract class DrawBowPlayerActorState extends PlayerActorState {
+public abstract class DrawBowPlayerActorState extends PlayerActorState{
   public PlayerActorState moveState;
   @Override
   public void act(ServerPlayerActor parentActor) {

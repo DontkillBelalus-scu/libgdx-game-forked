@@ -7,8 +7,9 @@ import java.util.Set;
 import org.yaml.snakeyaml.Yaml;
 
 import com.badlogic.gdx.graphics.Color;
-import pama1234.gdx.game.element.duel.Duel;
 
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.theme.ServerThemeData;
 
 /**
  * 很丑，得改
@@ -24,9 +25,9 @@ public class ThemeData{
     text,background,
     stroke;
   public ThemeData() {}
-  public static ThemeData fromData(pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData in) {
+  public static ThemeData fromData(ServerThemeData in) {
     ThemeData out=new ThemeData();
-    Yaml yaml= Duel.localization.yaml;
+    Yaml yaml=Duel.localization.yaml;
     String string=yaml.dumpAsMap(out);
     LinkedHashMap<String,Object> map=yaml.load(string);
     Set<Entry<String,Object>> entrySet=map.entrySet();
@@ -67,8 +68,8 @@ public class ThemeData{
    * 
    * @return
    */
-  public pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData toData() {
-    pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData out=new pama1234.gdx.game.element.duel.server.duel.util.theme.ServerThemeData();
+  public ServerThemeData toData() {
+    ServerThemeData out=new ServerThemeData();
     Yaml yaml=Duel.localization.yaml;
     String string=yaml.dumpAsMap(this);
     LinkedHashMap<String,Object> map=yaml.load(string);

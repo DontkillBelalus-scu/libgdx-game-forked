@@ -8,11 +8,11 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.esotericsoftware.kryo.Kryo;
 
-import pama1234.app.game.server.duel.NetUtil.GameServer;
-import pama1234.app.game.server.duel.net.InputData;
-import pama1234.app.game.server.duel.net.OutputData;
-import pama1234.app.game.server.duel.util.ai.neat.ServerFisheyeVision;
-import pama1234.app.game.server.duel.util.input.ServerInputOutput;
+import pama1234.gdx.game.element.duel.server.NetUtil.GameServer;
+import pama1234.gdx.game.element.duel.server.net.InputData;
+import pama1234.gdx.game.element.duel.server.net.OutputData;
+import pama1234.gdx.game.element.duel.server.util.ai.neat.ServerFisheyeVision;
+import pama1234.gdx.game.element.duel.server.util.input.ServerInputOutput;
 import pama1234.util.UtilServer;
 import pama1234.util.net.SocketData;
 import pama1234.util.net.SocketWrapper;

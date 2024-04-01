@@ -1,15 +1,15 @@
 package pama1234.gdx.game.element.duel.server.util.player;
 
-import pama1234.app.game.server.duel.DuelServer;
-import pama1234.app.game.server.duel.util.Const;
-import pama1234.app.game.server.duel.util.arrow.ServerLongbowArrowHead;
-import pama1234.app.game.server.duel.util.arrow.ServerLongbowArrowShaft;
-import pama1234.app.game.server.duel.util.input.AbstractInputDevice;
+import pama1234.gdx.game.element.duel.server.DuelServer;
+import pama1234.gdx.game.element.duel.server.util.Const;
+import pama1234.gdx.game.element.duel.server.util.arrow.ServerLongbowArrowHead;
+import pama1234.gdx.game.element.duel.server.util.arrow.ServerLongbowArrowShaft;
+import pama1234.gdx.game.element.duel.server.util.input.AbstractInputDevice;
 import pama1234.math.UtilMath;
 
 public class ServerDrawLongbowPlayerActorState extends DrawBowPlayerActorState {
   public DuelServer duelSever;
-  public final float unitAngleSpeed=0.1f*UtilMath.PI2/Const.IDEAL_FRAME_RATE;
+  public final float unitAngleSpeed=0.1f*UtilMath.PI2/ Const.IDEAL_FRAME_RATE;
   public final int chargeRequiredFrameCount=UtilMath.floor(0.5f*Const.IDEAL_FRAME_RATE);
   public final float ringSize=80;
   public final float ringStrokeWeight=8;
@@ -22,7 +22,7 @@ public class ServerDrawLongbowPlayerActorState extends DrawBowPlayerActorState {
     return this;
   }
   @Override
-  public void aim(ServerPlayerActor parentActor,AbstractInputDevice input) {
+  public void aim(ServerPlayerActor parentActor, AbstractInputDevice input) {
     parentActor.aimAngle+=input.horizontalMove*unitAngleSpeed;
   }
   @Override

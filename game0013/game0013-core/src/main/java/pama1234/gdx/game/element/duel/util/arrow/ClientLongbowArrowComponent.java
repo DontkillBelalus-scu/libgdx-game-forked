@@ -1,11 +1,11 @@
 package pama1234.gdx.game.element.duel.util.arrow;
 
-import pama1234.app.game.server.duel.util.arrow.ServerLongbowArrowComponent;
-import pama1234.gdx.game.duel.Duel;
-import pama1234.gdx.game.duel.util.graphics.Particle;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.arrow.ServerLongbowArrowComponent;
+import pama1234.gdx.game.element.duel.util.graphics.Particle;
 import pama1234.math.UtilMath;
 
-public abstract class ClientLongbowArrowComponent extends ServerLongbowArrowComponent{
+public abstract class ClientLongbowArrowComponent extends ServerLongbowArrowComponent {
   public final Duel p;
   public ClientLongbowArrowComponent(Duel duel) {
     super();

@@ -1,6 +1,5 @@
 package pama1234.gdx.game.element.duel.server.util.state;
 
-
 import pama1234.gdx.game.element.duel.server.ServerGameSystem;
 
 public abstract class ServerGameSystemState{

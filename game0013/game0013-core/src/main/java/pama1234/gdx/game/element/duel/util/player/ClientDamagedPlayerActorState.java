@@ -1,11 +1,11 @@
 package pama1234.gdx.game.element.duel.util.player;
 
-import pama1234.app.game.server.duel.util.player.ServerDamagedPlayerActorState;
-import pama1234.app.game.server.duel.util.player.ServerPlayerActor;
-import pama1234.gdx.game.duel.Duel;
+import pama1234.gdx.game.element.duel.Duel;
+import pama1234.gdx.game.element.duel.server.util.player.ServerDamagedPlayerActorState;
+import pama1234.gdx.game.element.duel.server.util.player.ServerPlayerActor;
 import pama1234.math.UtilMath;
 
-public final class ClientDamagedPlayerActorState extends ServerDamagedPlayerActorState{
+public final class ClientDamagedPlayerActorState extends ServerDamagedPlayerActorState {
   public final Duel p;
   public ClientDamagedPlayerActorState(Duel duel) {
     this.p=duel;
