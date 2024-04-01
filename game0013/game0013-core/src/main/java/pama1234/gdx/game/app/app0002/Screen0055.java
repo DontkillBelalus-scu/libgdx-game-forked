@@ -64,6 +64,25 @@ public class Screen0055 extends ScreenCoreState3D<StateCenter0055,StateEntity005
     line(0,0,0,0,0,100);
   }
 
+  public void cube(float x,float y,float z,float w,float h,float l) {
+    // 绘制立方体的8个顶点
+    line(x, y, z, x + w, y, z);
+    line(x + w, y, z, x + w, y + h, z);
+    line(x + w, y + h, z, x, y + h, z);
+    line(x, y + h, z, x, y, z);
+
+    line(x, y, z + l, x + w, y, z + l);
+    line(x + w, y, z + l, x + w, y + h, z + l);
+    line(x + w, y + h, z + l, x, y + h, z + l);
+    line(x, y + h, z + l, x, y, z + l);
+
+    // 绘制连接这些顶点的线条，形成立方体的边
+    line(x, y, z, x, y, z + l);
+    line(x + w, y, z, x + w, y, z + l);
+    line(x + w, y + h, z, x + w, y + h, z + l);
+    line(x, y + h, z, x, y + h, z + l);
+  }
+
   @Override
   public void update() {}
 
