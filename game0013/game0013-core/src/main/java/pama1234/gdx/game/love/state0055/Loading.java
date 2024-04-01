@@ -12,7 +12,8 @@ public class Loading extends StateEntity0055{
   @Override
   public void update() {
 
-//        p.state(new BulletTest3DModel(p));
-    p.state(new CharacterTest(p));
+    p.state(new BulletTest3DModel(p));
+    //        p.state(new Duel3D(p));
+    //    p.state(new CharacterTest(p));
   }
 }

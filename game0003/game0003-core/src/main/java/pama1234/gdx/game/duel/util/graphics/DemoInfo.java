@@ -15,12 +15,14 @@ public class DemoInfo extends Entity<Duel>{
     text.begin();
     p.beginShape();
     p.beginBlend();
-    p.background(p.theme().background,200);
+    //    p.background(p.theme().background,200);
     p.doStroke();
     p.stroke(p.theme().stroke);
-    p.strokeWeightOriginal(2);
-    p.noFill();
-    p.rect(0,0,text.texture.getWidth(),text.texture.getHeight());
+    int strokeWeight=2;
+    p.strokeWeightOriginal(strokeWeight);
+    //    p.noFill();
+    p.fill(p.theme().background,200);
+    p.rect(strokeWeight,strokeWeight,text.texture.getWidth()-strokeWeight,text.texture.getHeight()-strokeWeight*2);
     p.endBlend();
     p.endShape();
     p.setTextScale(1);

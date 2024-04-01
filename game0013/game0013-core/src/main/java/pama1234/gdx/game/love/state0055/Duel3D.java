@@ -16,12 +16,12 @@ import pama1234.math.vec.Vec3f;
 import pama1234.util.wrapper.Center;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
-public class BulletTest3DModel extends StateEntity0055{
+public class Duel3D extends StateEntity0055{
 
-//  public static ShapeDrawer customShapeDrawer;
-//  public static SpriteBatch3D batch3d;
+  public static ShapeDrawer customShapeDrawer;
+  public static SpriteBatch3D batch3d;
 
-  public BulletTest3DModel(Screen0055 p) {
+  public Duel3D(Screen0055 p) {
     super(p);
   }
 
@@ -50,7 +50,8 @@ public class BulletTest3DModel extends StateEntity0055{
 
     p.centerCamAddAll(telescope);
 
-//    customShapeDrawer=new ShapeDrawer(batch3d=new SpriteBatch3D(p.cam3d.camera));
+    //    p.cam3d.point.des.set(0,0,-1024);
+    customShapeDrawer=new ShapeDrawer(batch3d=new SpriteBatch3D(p.cam3d.camera));
 
     bulletTarget=p.cam3d.point.pos;
     gameCenter=new GameCenter();
