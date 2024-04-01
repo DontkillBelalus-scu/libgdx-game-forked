@@ -50,26 +50,7 @@ public class CharacterTest extends StateEntity0055{
 
     @Override
     public void display() {
-      //      float l=3;
-      //
-      //      p.noStroke();
-      //      p.circle(a.x,a.y,a.z,l,0);
-      //      p.circle(b.x,b.y,b.z,l,0);
-      //      p.circle(c.x,c.y,c.z,l,0);
-      //
-      //      var cam=p.usedCamera.position;
-      //      var foot=MathTools.perpendicularFoot(a.x,a.y,a.z,b.x,b.y,b.z,cam.x,cam.y,cam.z);
-      //      float ox=foot.x;
-      //      float oy=foot.y;
-      //      float oz=foot.z;
-      //
-      //      MathPool.vec3fPool.free(foot);
-      //      p.circle(ox,oy,oz,l,0);
-      //
-      //      p.doStroke();
-      //      p.line(a.x,a.y,a.z,b.x,b.y,b.z);
-
-      int l=20;
+      float l=80;
 
       p.line(l,0,0,0,l,0); // 边1
       p.line(0,l,0,-l,0,0); // 边2
@@ -89,25 +70,18 @@ public class CharacterTest extends StateEntity0055{
       p.line(0,0,-l,0,l,0); // 边11
       p.line(0,0,-l,0,-l,0); // 边12
 
-      //      p.line(-l,0,0,l,0,0); // 缺失的边9，正方形的第一条对角线
-      //      p.line(0,-l,0,0,l,0); // 缺失的边10，正方形的第二条对角线
-      //      p.line(0,0,l,-l,0,0); // 缺失的边11，连接上顶点到正方形的对角顶点
-      //      p.line(0,0,-l,l,0,0); // 缺失的边12，连接下顶点到正方形的对角顶点
+      l/=4f;
 
-      //      p.line(100,0,0,0,100,0); // 边1
+      for(float i=-l;i<=l;i+=5) {
+        //        p.stroke(0,(int)(i/100f*255),0);
+        p.line(-l,-l,i,-l,l,i);
+        p.line(-l,i,-l,l,i,-l);
+        p.line(i,-l,-l,i,-l,l);
 
-      //      for(int i=0;i<=100;i+=5) {
-      //        //        p.stroke((int)(i/100f*255),0,0);
-      //        p.line(0,0,i,0,100,i);
-      //      }
-      //      for(int i=0;i<=100;i+=5) {
-      //        //        p.stroke(0,(int)(i/100f*255),0);
-      //        p.line(0,i,0,100,i,0);
-      //      }
-      //      for(int i=0;i<=100;i+=5) {
-      //        //        p.stroke(0,0,(int)(i/100f*255));
-      //        p.line(i,0,0,i,0,100);
-      //      }
+        p.line(l,-l,i,l,l,i);
+        p.line(-l,i,l,l,i,l);
+        p.line(i,l,-l,i,l,l);
+      }
     }
   }
 

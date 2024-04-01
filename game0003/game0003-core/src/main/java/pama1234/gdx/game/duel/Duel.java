@@ -3,6 +3,12 @@ package pama1234.gdx.game.duel;
 import static pama1234.app.game.server.duel.ServerConfigData.neat;
 import static pama1234.app.game.server.duel.util.Const.CANVAS_SIZE;
 
+import java.util.function.Supplier;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Net.Protocol;
+import com.badlogic.gdx.net.SocketHints;
+
 import pama1234.app.game.server.duel.NetUtil.LoginInfo;
 import pama1234.app.game.server.duel.ServerConfigData.GameMode;
 import pama1234.app.game.server.duel.ServerConfigData.ServerAttr;
@@ -22,12 +28,7 @@ import pama1234.gdx.util.info.MouseInfo;
 import pama1234.gdx.util.info.TouchInfo;
 import pama1234.gdx.util.net.SocketWrapperGDX;
 import pama1234.yaml.Serialization;
-
-import java.util.function.Supplier;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Net.Protocol;
-import com.badlogic.gdx.net.SocketHints;
+import space.earlygrey.shapedrawer.CapType;
 
 /**
  * Title: Duel
@@ -130,7 +131,9 @@ public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
     if(config.data.mode==neat) neatE=new NeatEntity(this,game(),true);
 
     backgroundColor(theme().background);
+    strokeCap(CapType.NONE);
     setTextColor(theme().text);
+//    textColor(theme().text);
     demoInfo=new DemoInfo(this);
 
     setupCamera();

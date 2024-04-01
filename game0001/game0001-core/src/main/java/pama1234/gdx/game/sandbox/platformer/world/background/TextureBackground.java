@@ -38,6 +38,7 @@ public class TextureBackground extends Background{
   }
   @Override
   public void display() {
+    p.renderer(p.imageBatch);
     p.tint((int)(pc.pc.pw.skyLight()*256));
     p.imageBatch.draw(img,x,y,width,height);
     for(int i=0;i<8;i++) drawImage(x+side[i][0]*width,y+side[i][1]*height);
