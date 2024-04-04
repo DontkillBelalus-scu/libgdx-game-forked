@@ -13,7 +13,6 @@ import hhs.game.diffjourney.entities.Mushroom;
 import hhs.game.diffjourney.entities.Protagonist;
 import hhs.game.diffjourney.entities.enemies.MultipleEnemyGenerator;
 import hhs.game.diffjourney.map.Map;
-import hhs.game.diffjourney.map.MiniMap;
 import hhs.game.diffjourney.map.Region;
 import hhs.game.diffjourney.screens.GameScreen;
 import hhs.gdx.hsgame.tools.CameraControlGesturer;
@@ -99,11 +98,6 @@ public class TestSence extends GameScreen{
     nf.setPosition(0,Resource.height);
     nf.add(()->"血量："+c.data.hp,()->c.data.hp/100f,Resource.font.newFont(64,Color.BLUE));
     stage.addActor(nf);
-
-    final MiniMap map=new MiniMap(m);
-    addEntity(map);
-    d.addTrace(()->camera.position.toString());
-    d.addTrace(()->"sr:"+map.tmp.toString());
 
     addEntity(
       EntityTool.createUpdater(

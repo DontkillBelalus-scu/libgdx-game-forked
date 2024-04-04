@@ -95,7 +95,6 @@ repositories {
   // flatDir { dirs 'libs' }
   // needed for AAPT2, may be needed for other tools
   mavenCentral()
-  maven { url 'https://jitpack.io' }
   google()
 }
 

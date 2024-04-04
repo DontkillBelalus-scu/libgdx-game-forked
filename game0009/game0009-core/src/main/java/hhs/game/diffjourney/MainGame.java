@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import hhs.game.diffjourney.screens.LoadingScreen;
 import hhs.game.diffjourney.screens.MainScreen;
+import hhs.game.diffjourney.ui.UiList;
 import hhs.gdx.hsgame.screens.BasicScreen;
 import hhs.gdx.hsgame.tools.BasicLoader;
 import hhs.gdx.hsgame.tools.FontManager;
@@ -67,6 +68,7 @@ public class MainGame extends Game{
   public void dispose() {
     super.dispose();
     res.dispose();
+    if(UiList.font!=null) UiList.font.dispose();
     // TODO: Implement this method
   }
   @Override

@@ -2,26 +2,26 @@ package hhs.gdx.hsgame.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import java.util.LinkedList;
+import com.badlogic.gdx.utils.Array;
 
 public class EntityLayers extends BasicEntity{
 
   public final static int ssize=20,msize=100,lsize=300;
   public static int lastId=0;
-  LinkedList<EntityCenter<BasicEntity>> layer;
+  Array<EntityCenter<BasicEntity>> layer;
   public EntityCenter<BasicEntity> back;
   public EntityCenter<BasicEntity> middle;
   public EntityCenter<BasicEntity> front;
   public EntityLayers() {
-    layer=new LinkedList<>();
+    layer=new Array<>();
 
     back=new EntityCenter<>(ssize);
     middle=new EntityCenter<>(lsize);
     front=new EntityCenter<>(msize);
 
-    layer.addLast(back);
-    layer.addLast(middle);
-    layer.addLast(front);
+    layer.add(back);
+    layer.add(middle);
+    layer.add(front);
 
   }
 
@@ -38,17 +38,7 @@ public class EntityLayers extends BasicEntity{
   }
   public void addEntity(BasicEntity entity) {
     if(entity instanceof Stackable se) {
-      switch(se.getLayer()) {
-        case BACK:
-          back.add(entity);
-          break;
-        case MIDDLE:
-          middle.add(entity);
-          break;
-        case FRONT:
-          front.add(entity);
-          break;
-      }
+      addEntity(se.getLayer(),entity);
     }else middle.add(entity);
   }
   public void addEntity(int index,BasicEntity entity) {
@@ -70,17 +60,23 @@ public class EntityLayers extends BasicEntity{
 
   public void removeEntity(BasicEntity entity) {
     if(entity instanceof Stackable se) {
-      switch(se.getLayer()) {
-        case BACK:
-          back.remove(entity);
-          break;
-        case MIDDLE:
-          middle.remove(entity);
-          break;
-        case FRONT:
-          front.remove(entity);
-          break;
-      }
+      removeEntity(se.getLayer(),entity);
+    }
+  }
+  public void removeEntity(int index,BasicEntity entity) {
+    layer.get(index).remove(entity);
+  }
+  public void removeEntity(Layer l,BasicEntity entity) {
+    switch(l) {
+      case BACK:
+        back.remove(entity);
+        break;
+      case MIDDLE:
+        middle.remove(entity);
+        break;
+      case FRONT:
+        front.remove(entity);
+        break;
     }
   }
 

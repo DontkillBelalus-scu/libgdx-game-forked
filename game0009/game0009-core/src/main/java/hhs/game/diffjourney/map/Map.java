@@ -20,6 +20,7 @@ import squidpony.squidgrid.mapping.FlowingCaveGenerator;
 public class Map extends EntityCenter<Region> implements Collision,AvailableMap,EntityLayers.Stackable{
   int mapWidth,mapHeight;
   int regionX,regionY;
+  int blockWidth=50,blockHeight=50;
   public char map[][];
   public double fovmap[][];
   OrthographicCamera camera;

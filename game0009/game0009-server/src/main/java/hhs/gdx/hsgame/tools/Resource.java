@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteCache;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -46,6 +47,8 @@ public class Resource implements Disposable{
     if(screens==null) screens=new HashMap<>();
     if(jreader==null) jreader=new JsonReader();
     if(xreader==null) xreader=new XmlReader();
+
+    Texture.setAssetManager(asset);
   }
   public static void setScreen(Screen s) {
     game.setScreen(s);
@@ -70,5 +73,14 @@ public class Resource implements Disposable{
     shape.dispose();
     if(font!=null) font.dispose();
     cacheRender.dispose();
+    asset=null;
+    batch=null;
+    stageBatch=null;
+    shape=null;
+    cacheRender=null;
+    recoder=null;
+    screens=null;
+    jreader=null;
+    xreader=null;
   }
 }

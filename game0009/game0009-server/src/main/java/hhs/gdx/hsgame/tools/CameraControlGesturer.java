@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 
 public class CameraControlGesturer extends GestureDetector.GestureAdapter{
-  OrthographicCamera cam;
+  public OrthographicCamera cam;
   float zoom=0;
   public CameraControlGesturer(OrthographicCamera cam) {
     this.cam=cam;

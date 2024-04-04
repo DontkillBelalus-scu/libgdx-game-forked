@@ -37,6 +37,7 @@ public class UnLimitMapTestSence extends GameScreen{
     c=new Protagonist();
     addEntity(map=new InfiniteMap(camera,c));
     map.addRegion();
+
     addEntity(c);
     // 为了方便看效果将速度调快了点
     c.setMap(((InfiniteRegion)map.regions.values().toArray()[0]).map);

@@ -39,8 +39,8 @@ public class Character<S,T extends Entity>extends BasicEntity implements EntityL
   public Rectangle rect=new Rectangle();
   public TextureRegion tr;
   public State state=State.idle;
-  Collision c;
-  Protagonist pro;
+  public Collision c;
+  public Protagonist pro;
   public Character() {
     this.animation=new AnimationSet<>();
   }

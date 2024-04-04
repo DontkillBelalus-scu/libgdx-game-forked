@@ -123,7 +123,6 @@ public abstract class BasicScreen extends UtilScreen2D{
   public void dispose() {
     // super.dispose();
     stop=true;
-//    if(imageBatch!=null) imageBatch.dispose();
     if(font!=null) font.dispose();
     if(center!=null) center.dispose();
     if(serverCenter!=null) serverCenter.dispose();
@@ -133,6 +132,11 @@ public abstract class BasicScreen extends UtilScreen2D{
       e.dispose();
     }
     entities.clear();
+
+    entities=null;
+    font=null;
+    center=null;
+    serverCenter=null;
   }
   @Override
   public void resize(int width,int height) {

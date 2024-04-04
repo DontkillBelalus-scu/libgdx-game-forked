@@ -1,6 +1,5 @@
 package hhs.game.diffjourney.map;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,21 +21,28 @@ public class MiniMap extends BasicEntity implements EntityLayers.Stackable{
   Texture pixTexture;
   public int sr;
   public int mapBound=50,blockSize=50;
+  SpriteBatch batch2=new SpriteBatch();
 
   public MiniMap(AvailableMap map) {
     this.map=map;
     pos.set(Resource.width-Resource.u*4,Resource.height-Resource.u*4);
     size.set(Resource.u*4,Resource.u*4);
-    localCam=new OrthographicCamera(Resource.width,Resource.height);
-    localCam.position.set(Resource.width/2,Resource.height/2,0);
+    localCam=new OrthographicCamera(Resource.u*4,Resource.u*4);
     viewport=new FitViewport(size.x,size.y,localCam);
+    viewport.setScreenBounds((int)(Resource.width-Resource.u*4),(int)(Resource.height-Resource.u*4),(int)Resource.u*4,(int)Resource.u*4);
     pixmap=new Pixmap(mapBound,mapBound,Pixmap.Format.RGBA8888);
     pixTexture=new Texture(pixmap);
   }
   @Override
   public void setSize(float w,float h) {
     super.setSize(w,h);
-    viewport.setWorldSize(size.x,size.y);
+    viewport.setScreenSize((int)size.x,(int)size.y);
+  }
+  @Override
+  public void setPosition(float x,float y) {
+    super.setPosition(x,y);
+    viewport.setScreenPosition((int)x,(int)y);
+    // TODO: Implement this method
   }
 
   @Override
@@ -54,35 +60,36 @@ public class MiniMap extends BasicEntity implements EntityLayers.Stackable{
   @Override
   public void update(float delta) {
     super.update(delta);
+    localCam.position.set(cam.position);
     localCam.update();
-    int i,j,xindex=0,yindex=0;
-    sr=mapBound*blockSize/2;
-    int sx=suit(cam.position.x+sr),sy=suit(cam.position.y+sr);
-    pixmap.setColor(0,0,0,0);
-    pixmap.fill();
-    for(j=suit(cam.position.y-sr);j<=sy;j+=blockSize,yindex++) {
-      for(i=suit(cam.position.x-sr),xindex=0;i<=sx;i+=blockSize,xindex++) {
-        if(map instanceof BasicEntity be) switch(map.getBlock((i-(int)be.pos.x)/blockSize,(j-(int)be.pos.y)/blockSize)) {
-          case '#':
-            pixmap.setColor(Color.WHITE);
-            break;
-          default:
-            pixmap.setColor(0,0,0,0);
-            break;
-        }
-        pixmap.drawPixel(xindex,mapBound-1-yindex);
-      }
-    }
-    pixmap.setColor(Color.RED);
-    for(BasicEntity be:((LayersScreen)screen).layers.middle.sons) {
-      tmp.set(be.pos).sub(cam.position.x,cam.position.y).sub(cam.position.x-blockSize*mapBound/2,cam.position.y-blockSize*mapBound/2);
-      tmp.scl(1/blockSize);
-      if(tmp.x>=0&&tmp.y>=0&&mapBound>tmp.x&&mapBound>tmp.y) {
-        pixmap.drawPixel((int)tmp.x,(int)tmp.y);
-      }
-    }
-    pixmap.setColor(Color.GREEN);
-    pixmap.drawPixel(mapBound/2,mapBound/2);
+    //    int i,j,xindex=0,yindex=0;
+    //    sr=mapBound*blockSize/2;
+    //    int sx=suit(cam.position.x+sr),sy=suit(cam.position.y+sr);
+    //    pixmap.setColor(0,0,0,0);
+    //    pixmap.fill();
+    //    for(j=suit(cam.position.y-sr);j<=sy;j+=blockSize,yindex++) {
+    //      for(i=suit(cam.position.x-sr),xindex=0;i<=sx;i+=blockSize,xindex++) {
+    //        if(map instanceof BasicEntity be) switch(map.getBlock((i-(int)be.pos.x)/blockSize,(j-(int)be.pos.y)/blockSize)) {
+    //          case '#':
+    //            pixmap.setColor(Color.WHITE);
+    //            break;
+    //          default:
+    //            pixmap.setColor(0,0,0,0);
+    //            break;
+    //        }
+    //        pixmap.drawPixel(xindex,mapBound-1-yindex);
+    //      }
+    //    }
+    //    pixmap.setColor(Color.RED);
+    //    for(BasicEntity be:((LayersScreen)screen).layers.middle.sons) {
+    //      tmp.set(be.pos).sub(cam.position.x,cam.position.y).sub(cam.position.x-blockSize*mapBound/2,cam.position.y-blockSize*mapBound/2);
+    //      tmp.scl(1/blockSize);
+    //      if(tmp.x>=0&&tmp.y>=0&&mapBound>tmp.x&&mapBound>tmp.y) {
+    //        pixmap.drawPixel((int)tmp.x,(int)tmp.y);
+    //      }
+    //    }
+    //    pixmap.setColor(Color.GREEN);
+    //    pixmap.drawPixel(mapBound/2,mapBound/2);
     //    for(int i = 0; i < mapBound; ++i) {
     //    	for(int j = 0; j < mapBound; ++j) {
     //    		switch(map.getBlock(i,j)){
@@ -100,11 +107,13 @@ public class MiniMap extends BasicEntity implements EntityLayers.Stackable{
 
   @Override
   public void render(SpriteBatch batch) {
-    pixTexture.draw(pixmap,0,0);
-    //viewport.apply();
-    batch.setProjectionMatrix(localCam.combined);
-    batch.draw(pixTexture,pos.x,pos.y,size.x,size.y);
-    batch.setProjectionMatrix(cam.combined);
+    //pixTexture.draw(pixmap,0,0);
+    viewport.apply(false);
+    batch2.setProjectionMatrix(localCam.combined);
+    batch2.begin();
+    for(int i=0;i<((LayersScreen)screen).layers.back.sons.size;i++) ((LayersScreen)screen).layers.back.sons.get(i).render(batch2);
+    for(int i=0;i<((LayersScreen)screen).layers.middle.sons.size;i++) ((LayersScreen)screen).layers.middle.sons.get(i).render(batch2);
+    batch2.end();
   }
 
   @Override

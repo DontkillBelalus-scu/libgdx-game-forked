@@ -6,19 +6,24 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.utils.Pools;
 
 public class FontTool{
-  public static int getWidth(BitmapFont font,String str) {
+  public static float getWidth(BitmapFont font,String str) {
     GlyphLayout layout=Pools.obtain(GlyphLayout.class);
     layout.setText(font,str);
-    return (int)layout.width;
+    return layout.width;
+  }
+  public static float getWidth(BitmapFont font) {
+    GlyphLayout layout=Pools.obtain(GlyphLayout.class);
+    layout.setText(font,"标");
+    return layout.width;
   }
   // 绘制文字，超过w后自动换行
-  public static void drawText(BitmapFont font,Batch batch,String text,int x,int y,int w,int lineSpacing) {
+  public static void drawText(BitmapFont font,Batch batch,String text,float x,float y,float w,float lineSpacing) {
     int lastSubStrIndex=0;
     for(int i=0;i<text.length();i++) {
       // 计算当前字符串、最后一个字符、宽度
       String currentSubStr=text.substring(lastSubStrIndex,i+1); // 当前正在组建的一行字符串
       char currentLastChar=currentSubStr.charAt(currentSubStr.length()-1);
-      int cW=getWidth(font,currentSubStr);
+      int cW=(int)getWidth(font,currentSubStr);
       if(cW>w||currentLastChar=='\n') {
         font.draw(batch,text.substring(lastSubStrIndex,i),x,y);
         y-=font.getCapHeight()/2+lineSpacing; // fontSize/2等于行高

@@ -10,11 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hhs.game.diffjourney.game.HomeSense;
 import hhs.game.diffjourney.game.TeachSence;
 import hhs.game.diffjourney.game.TestSence;
 import hhs.game.diffjourney.game.UnLimitMapTestSence;
 import hhs.game.diffjourney.ui.MyDialogBox;
 import hhs.game.diffjourney.ui.PixelFontButton;
+import hhs.game.diffjourney.ui.UiList;
 import hhs.gdx.hsgame.entities.Entity;
 import hhs.gdx.hsgame.screens.BasicScreen;
 import hhs.gdx.hsgame.tools.ColorTool;
@@ -32,11 +34,11 @@ public class MainScreen extends BasicScreen{
   public TitleLable titleLable;
   public MainScreen() {
     b1=new PixelFontButton("开启新征途");
-    b1.addListener(ListenerBuilder.touch(()->Resource.setScreen(TestSence.class)));
+    b1.addListener(ListenerBuilder.touch(()->Resource.setScreen(new TestSence())));
     b2=new PixelFontButton("退出");
     b2.addListener(ListenerBuilder.touch(()->Gdx.app.exit()));
     b3=new PixelFontButton("教程");
-    b3.addListener(ListenerBuilder.touch(()->Resource.setScreen(TeachSence.class)));
+    b3.addListener(ListenerBuilder.touch(()->Resource.setScreen(new TeachSence())));
     b1.setScale(8);
     b2.setScale(8);
     b3.setScale(8);
@@ -44,14 +46,29 @@ public class MainScreen extends BasicScreen{
     table=new Table();
     table.setFillParent(true);
     table.center();
-    Cell<?> c1=table.add(b1).colspan(2);
-    table.row().padTop(50);
-    table.add(b3);
-    table.add(b2);
+
+    Cell<?> c1=table.add(b1).colspan(2).center();
+
+    var b6=new PixelFontButton("大厅");
+    b6.setScale(8);
+    b6.addListener(ListenerBuilder.touch(()->Resource.setScreen(new HomeSense())));
+    table.add(b6).padLeft(Resource.u/2).left();
+
+    table.row().padTop(Resource.u/4f);
+    table.add(b3).padRight(Resource.u/2f);
+    table.add(b2).padRight(Resource.u/2f);
+
     var b4=new PixelFontButton("无限制大小地图测试");
     b4.setScale(8);
     b4.addListener(ListenerBuilder.touch(()->Resource.setScreen(new UnLimitMapTestSence())));
     table.add(b4);
+
+    table.row().padTop(Resource.u/4f);
+    var b5=new PixelFontButton("交互测试");
+    b5.setScale(8);
+    b5.addListener(ListenerBuilder.touch(()->Resource.setScreen(new HomeSense())));
+    table.add(b5).colspan(2).center();
+
     stage.addActor(table);
     table.validate();
     titleLable=new TitleLable(c1.getActorY()+c1.getActorHeight());
@@ -67,7 +84,7 @@ public class MainScreen extends BasicScreen{
             "我是异界探索委员会给您配置的I形辅助AI系统，我将为您提供异界探索的帮助",
             "现在点击\"开启新征途\"开始探索吧！"
           }));
-      dbox.setFont(font);
+      dbox.setFont(UiList.font);
       dbox.setScale(5);
       dbox.setBounds(0,0,Resource.width,Resource.height/3);
       stage.addActor(dbox);

@@ -115,7 +115,6 @@ public class TeachSence extends GameScreen{
           Enemy1 e=MultipleEnemyGenerator.getEnemy1();
           e.set(map,pro);
           TestSence.randomPos(rseed,e.pos,map.map,50,25);
-          e.size.set(pro.size).scl(2);
           addEntity(e);
           e.zindex=1;
           e.setInfo();

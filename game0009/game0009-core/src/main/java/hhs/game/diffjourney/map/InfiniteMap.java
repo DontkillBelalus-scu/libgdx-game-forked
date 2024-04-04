@@ -8,6 +8,7 @@ import com.dongbat.jbump.World;
 import hhs.game.diffjourney.entities.Protagonist;
 import hhs.gdx.hsgame.entities.BasicEntity;
 import hhs.gdx.hsgame.entities.EntityLayers;
+import hhs.gdx.hsgame.tools.CameraTool;
 import hhs.gdx.hsgame.util.Rect;
 import squidpony.squidgrid.mapping.FlowingCaveGenerator;
 import java.util.HashMap;
@@ -58,9 +59,7 @@ public class InfiniteMap extends BasicEntity implements Collision,EntityLayers.S
       50*regionWidth*(int)(p.x/(regionWidth*50))-regionWidth*25,
       50*regionHeight*(int)(p.y/(regionHeight*50))-regionHeight*25);
   }
-
-  public void addRegion() {
-    float x=camera.position.x,y=camera.position.y;
+  public void addRegion(float x,float y) {
     Vector2 opos=new Vector2(x,y);
     moveRange(opos);
     for(int i=0;i<9;i++) {
@@ -75,6 +74,14 @@ public class InfiniteMap extends BasicEntity implements Collision,EntityLayers.S
       regions.put(cpos,region);
       region.set(cpos,new Vector2(regionWidth,regionHeight),mapGenerator.generate());
     }
+  }
+  public void addRegion() {
+    float cw=CameraTool.getCamWidth(cam)/2;
+    float ch=CameraTool.getCamHeight(cam)/2;
+    addRegion(camera.position.x-cw,camera.position.y-ch);
+    addRegion(camera.position.x-cw,camera.position.y+ch);
+    addRegion(camera.position.x+cw,camera.position.y-ch);
+    addRegion(camera.position.x+cw,camera.position.y+ch);
   }
 
   @Override

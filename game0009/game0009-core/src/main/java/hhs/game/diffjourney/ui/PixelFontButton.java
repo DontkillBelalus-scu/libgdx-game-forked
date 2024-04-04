@@ -1,17 +1,18 @@
 package hhs.game.diffjourney.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import pama1234.gdx.util.font.MultiChunkFont;
+import hhs.gdx.hsgame.tools.FontTool;
 
 public class PixelFontButton extends Widget{
-  MultiChunkFont font=UiList.font;
+  BitmapFont font=UiList.font;
   String str;
-  float scale;
+  float scale=1,fontSize;
   Drawable drawable;
   TextButton.TextButtonStyle ts;
   public boolean down=false;
@@ -52,8 +53,8 @@ public class PixelFontButton extends Widget{
     float w=getWidth();
     float h=getHeight();
     if(drawable!=null) drawable.draw(batch,x,y,w,h);
-    font.getData().setScale(scale!=0?scale:1);
-    font.draw(batch,str,x,y+font.styleFast.size*scale);
+    font.getData().setScale(scale);
+    font.draw(batch,str,x,y+fontSize*scale);
     font.getData().setScale(UiList.originFontScale);
   }
   public float getMinWidth() {
@@ -64,13 +65,12 @@ public class PixelFontButton extends Widget{
   }
   @Override
   public float getPrefWidth() {
-    // TODO: Implement this method
-    return font.styleFast.size*scale*str.length();
+    return FontTool.getWidth(font,str)*scale;
   }
   @Override
   public float getPrefHeight() {
-    // TODO: Implement this method
-    return font.styleFast.size*scale;
+    fontSize=FontTool.getWidth(font);
+    return fontSize*scale;
   }
   public float getScale() {
     return this.scale;

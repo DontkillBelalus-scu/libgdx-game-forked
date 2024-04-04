@@ -31,7 +31,7 @@ public class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
   Rectangle rtmp=new Rectangle();
   Coord next;
   World<Rect> world;
-  Item<Rect> info;
+  public Item<Rect> info;
   public int speed=150;
   // 单位：秒
   float time=0,ftime=0;

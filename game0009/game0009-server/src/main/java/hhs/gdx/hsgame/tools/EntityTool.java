@@ -45,10 +45,22 @@ public class EntityTool{
       public void dispose() {}
     };
   }
+  public static Vector2 getCenter(BasicEntity be) {
+    return new Vector2(be.size).scl(0.5f).add(be.pos);
+  }
+  public static VectorProvider providePosition(final BasicEntity be) {
+    return ()->be.pos;
+  }
+  public static VectorProvider provideSize(final BasicEntity be) {
+    return ()->be.size;
+  }
   public static interface Updater{
     public void update(float d);
   }
   public static interface Renderer{
     public void render(SpriteBatch batch);
+  }
+  public static interface VectorProvider{
+    public Vector2 provide();
   }
 }

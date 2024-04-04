@@ -5,6 +5,7 @@ dependencies {
 
   api 'com.squidpony:squidlib-util:3.0.6'
   api "$gdxCustomModule:gdx:$gdxCustomVersion"
+  api "$gdxCustomModule:gdx-ai:1.8.2"
   api 'com.github.tommyettinger:jbump:v1.0.1'
   
   api "$pama1234RepoLocation:server-framework:$pama1234PublishVersion"

@@ -1,5 +1,6 @@
 package hhs.game.diffjourney.ui;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -13,7 +14,8 @@ import hhs.gdx.hsgame.tools.TextureTool;
 public class PauseSurface extends Table{
   BasicScreen screen;
   float fontScale=8,time=0,animTime=.4f;
-  public boolean show=false,ok=false;
+  public boolean show=true;
+  public static Texture shadow=PixmapBuilder.getRectangle(200,100,ColorTool.rgba(0,0,0,100));
   Vector2 correctPos=new Vector2();
   PixelFontButton c;
   public PauseSurface(BasicScreen b) {
@@ -25,27 +27,29 @@ public class PauseSurface extends Table{
       ListenerBuilder.touch(
         ()-> {
           screen.setTimeAcceleration(1);
-          show=false;
+          PauseSurface.this.remove();
         }));
     add(UiList.getBack()).padTop(50);
     validate();
     setSize(getPrefWidth(),getPrefHeight());
     setPosition(Resource.width/2-getPrefWidth()/2,-getPrefHeight());
     correctPos.set(getX(),Resource.height/2-getPrefHeight()/2);
+    setY(correctPos.y);
   }
   @Override
   public void act(float arg0) {
-    if(show) {
-      setY(correctPos.y);
-    }else {
-      setY(-getPrefHeight());
+    super.act(arg0);
+    if(show) setY(getY()+(correctPos.y-getY())/8);
+    else setY(getY()+(-getPrefHeight()*1.5f-getY())/8);
+    if(getY()<-getPrefHeight()) {
+      show=true;
+      super.remove();
     }
-    if(show) super.act(arg0);
   }
   @Override
   public void draw(Batch arg0,float arg1) {
-    if(show) super.draw(arg0,arg1);
-    // TODO: Implement this method
+    arg0.draw(shadow,0,0,Resource.width,Resource.height);
+    super.draw(arg0,arg1);
   }
   public PixelFontButton newButton(String str) {
     PixelFontButton b=new PixelFontButton(str);
@@ -59,4 +63,10 @@ public class PauseSurface extends Table{
   public void setScreen(BasicScreen screen) {
     this.screen=screen;
   }
+  @Override
+  public boolean remove() {
+    show=false;
+    return true;
+  }
+
 }

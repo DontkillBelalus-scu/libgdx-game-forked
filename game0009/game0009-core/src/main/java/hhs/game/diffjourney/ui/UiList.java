@@ -17,7 +17,7 @@ import hhs.gdx.hsgame.tools.PixmapBuilder;
 import java.util.HashMap;
 import pama1234.gdx.util.SharedResources;
 import pama1234.gdx.util.element.FontStyle;
-import pama1234.gdx.util.font.MultiChunkFont;
+import pama1234.gdx.util.font.chunk.MultiChunkFont;
 
 public class UiList{
   public static HashMap<Class<?>,Object> style=new HashMap<>();
@@ -45,8 +45,6 @@ public class UiList{
     if(surface==null) {
       surface=new PauseSurface(screen);
     }else surface.setScreen(screen);
-    surface.show=false;
-    stage.addActor(surface);
     if(pause==null) {
       pause=new PixelFontButton("暂停");
     }
@@ -58,7 +56,8 @@ public class UiList{
     pause.addListener(
       ListenerBuilder.touch(
         ()-> {
-          surface.show=true;
+          screen.stage.addActor(surface);
+          surface.setY(-surface.getPrefHeight());
           screen.timeAcceleration=0;
         }));
     stage.addActor(pause);
