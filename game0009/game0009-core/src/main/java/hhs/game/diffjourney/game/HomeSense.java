@@ -4,6 +4,8 @@ import hhs.game.diffjourney.entities.Protagonist;
 import hhs.game.diffjourney.interoperable.TestInteroperable;
 import hhs.game.diffjourney.map.Map;
 import hhs.game.diffjourney.screens.GameScreen;
+import hhs.gdx.hsgame.light.LightCenter;
+import hhs.gdx.hsgame.light.PointLight;
 import hhs.gdx.hsgame.tools.ColorTool;
 import hhs.gdx.hsgame.tools.EntityTool;
 import squidpony.squidmath.RNG;
@@ -25,5 +27,17 @@ public class HomeSense extends GameScreen{
     protagonist.setCurr(m);
 
     addEntity(new TestInteroperable(EntityTool.providePosition(protagonist)));
+
+    var lcenter=new LightCenter();
+    addEntity(lcenter);
+
+    final var pLight=new PointLight();
+    pLight.setRadiu(100);
+    pLight.setIntensity(0);
+    lcenter.add(pLight);
+    addEntity(EntityTool.createUpdater((d)->pLight.setPosition(protagonist.pos.x-pLight.size.x/2,protagonist.pos.y-pLight.size.y/2)));
+
+    m.computationalIllumination(0.125f);
+
   }
 }

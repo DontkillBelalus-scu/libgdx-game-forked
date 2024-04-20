@@ -10,6 +10,7 @@ public class LightTest extends BasicScreen{
   LightCenter lights=new LightCenter();
   public LightTest() {
     setClearColor(Color.BLACK);
+    final PointLight pl=new PointLight();
     input.addProcessor(
       new GestureDetector(
         new CameraControlGesturer(camera) {
@@ -22,9 +23,7 @@ public class LightTest extends BasicScreen{
     camera.combined.setToOrtho2D(0,0,Resource.width,Resource.height);
     lights=new LightCenter();
     addEntity(lights);
-    PointLight pl;
-    lights.add(pl=new PointLight());
-    pl.size.set(100,100);
-    pl.size.set(Resource.width/2,Resource.height/2);
+    lights.add(pl);
+    pl.size.set(1000,1000);
   }
 }

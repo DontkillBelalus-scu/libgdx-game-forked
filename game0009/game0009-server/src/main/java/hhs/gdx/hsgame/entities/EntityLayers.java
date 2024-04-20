@@ -36,6 +36,7 @@ public class EntityLayers extends BasicEntity{
     front.cam=cam;
     front.parent=this;
   }
+
   public void addEntity(BasicEntity entity) {
     if(entity instanceof Stackable se) {
       addEntity(se.getLayer(),entity);

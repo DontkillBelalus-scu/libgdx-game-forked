@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import hhs.game.diffjourney.screens.LoadingScreen;
+import hhs.game.diffjourney.screens.MainScreen;
 import hhs.game.diffjourney.ui.UiList;
-import hhs.gdx.hsgame.light.LightTest;
 import hhs.gdx.hsgame.screens.BasicScreen;
 import hhs.gdx.hsgame.tools.BasicLoader;
 import hhs.gdx.hsgame.tools.FontManager;
@@ -29,7 +29,7 @@ public class MainGame extends Game{
     res.init();
     asset=res.asset;
     load();
-    setScreen(basicLoader=new BasicLoader(asset,LightTest.class));
+    setScreen(basicLoader=new BasicLoader(asset,MainScreen.class));
     loadScreen=new LoadingScreen();
     basicLoader.setInit(()->Resource.font=new FontManager(Resource.asset.get("font.ttf")));
   }

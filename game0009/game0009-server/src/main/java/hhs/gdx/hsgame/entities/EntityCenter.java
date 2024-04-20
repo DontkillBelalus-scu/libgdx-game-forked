@@ -17,11 +17,6 @@ public class EntityCenter<T extends BasicEntity>extends BasicEntity{
     remove=new Array<>();
   }
 
-  public void addEntity(T be) {
-    be.parent=this;
-    sons.add(be);
-  }
-
   public void add(T be) {
     be.parent=this;
     be.screen=screen;

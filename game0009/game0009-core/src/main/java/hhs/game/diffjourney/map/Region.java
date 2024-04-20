@@ -31,6 +31,7 @@ public class Region extends BasicEntity implements Collision{
   Block[][] blocks;
   int fx,fy,msx,msy;
   boolean isAdd=false;
+  float illuminationAttenuationCoefficient=0.09375f;
   public Region(
     World<Rect> world,char[][] map,int msx,int msy,int fx,int fy,OrthographicCamera cam) {
     blocks=new Block[msx][msy];
@@ -61,6 +62,21 @@ public class Region extends BasicEntity implements Collision{
       Block.pool.freeAll(Array.with(blocks[i]));
     }
     Arrays.fill(blocks,null);
+  }
+  public void computationalIllumination(float illuminationAttenuationCoefficient) {
+    if(blocks[0][0]==null) {
+      this.illuminationAttenuationCoefficient=illuminationAttenuationCoefficient;
+      return;
+    }
+    for(int i=fx;i<msx+fx;i++) {
+      for(int j=fy;j<msy+fy;j++) {
+        float tmp=1;
+        for(int a=0;a<8;a++) {
+          if(getChar(i+fmove[a*2],j+fmove[a*2+1])=='#') tmp-=illuminationAttenuationCoefficient;
+        }
+        blocks[i-fx][j-fy].c=tmp;
+      }
+    }
   }
   public static short[] fmove= {0,1,1,1,1,0,1,-1,0,-1,-1,-1,-1,0,-1,1};
   public char getChar(int x,int y) {
@@ -110,7 +126,7 @@ public class Region extends BasicEntity implements Collision{
         }
         float tmp=1;
         for(int a=0;a<8;a++) {
-          if(getChar(i+fmove[a*2],j+fmove[a*2+1])=='#') tmp-=0.09375f;
+          if(getChar(i+fmove[a*2],j+fmove[a*2+1])=='#') tmp-=illuminationAttenuationCoefficient;
         }
         b.c=tmp;
         blocks[i-fx][j-fy]=b;

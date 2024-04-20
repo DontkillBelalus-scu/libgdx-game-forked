@@ -2,13 +2,14 @@ package hhs.gdx.hsgame.light;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import hhs.gdx.hsgame.entities.EntityCenter;
+import hhs.gdx.hsgame.entities.EntityLayers;
 
-public class LightCenter extends EntityCenter<BasicLight>{
+public class LightCenter extends EntityCenter<BasicLight> implements EntityLayers.Stackable{
   public ShaderProgram mLightShader;
-
   public LightCenter() {
     mLightShader=new ShaderProgram(
       """
@@ -28,11 +29,12 @@ public class LightCenter extends EntityCenter<BasicLight>{
         precision mediump float;
         varying vec4 v_color;
         varying vec2 f_coord;
+        uniform float intensity;
         void main(){
-          vec2 uv = (gl_FragCoord.xy*2.-vec2(1080.,1920.)) / 1080.;
-          float d=length(uv)*1.;
-          vec4 col=vec4(0.5,0.6,0.7,.5);
-          col*=1./(d+.5);
+          vec2 uv = f_coord;//(f_coord.xy*2.-vec2(1080.,1920.)) / 1080.;
+          float d=length(uv*2.-1.);
+          vec4 col=vec4(1.,1.,1.,.5);
+          col*=1./(d+1.-intensity)-0.6*sqrt(d);
           gl_FragColor = col;
         }
         """);
@@ -43,9 +45,14 @@ public class LightCenter extends EntityCenter<BasicLight>{
       Gdx.app.exit();
     }
   }
+  @Override
+  public EntityLayers.Layer getLayer() {
+    return EntityLayers.Layer.FRONT;
+  }
+
   void ready() {
-    mLightShader.setUniformMatrix("u_projTrans",cam.combined);
     mLightShader.bind();
+    mLightShader.setUniformMatrix("u_projTrans",cam.combined);
   }
 
   public void dispose() {
@@ -53,6 +60,8 @@ public class LightCenter extends EntityCenter<BasicLight>{
   }
   public void render(SpriteBatch batch) {
     ready();
+    Gdx.gl20.glEnable(GL20.GL_BLEND);
+    Gdx.gl20.glBlendFunc(GL20.GL_ONE,GL20.GL_ONE);
     for(var light:sons) {
       if(light instanceof PointLight pl) mLightShader.setUniformf("l_color",pl.lightColor.r,pl.lightColor.g,pl.lightColor.b,pl.lightColor.a);
       light.render(batch);
@@ -64,7 +73,9 @@ public class LightCenter extends EntityCenter<BasicLight>{
   }
   @Override
   public void UpdateAndRender(SpriteBatch batch,float delta) {
-    //ready();
+    ready();
+    Gdx.gl20.glEnable(GL20.GL_BLEND);
+    Gdx.gl20.glBlendFunc(GL20.GL_ONE,GL20.GL_ONE);
     for(var light:sons) {
       if(light instanceof PointLight pl) mLightShader.setUniformf("l_color",pl.lightColor.r,pl.lightColor.g,pl.lightColor.b,pl.lightColor.a);
       light.update(delta);

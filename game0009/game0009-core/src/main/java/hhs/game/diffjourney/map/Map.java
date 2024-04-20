@@ -52,8 +52,13 @@ public class Map extends EntityCenter<Region> implements Collision,AvailableMap,
     int i,j,regionSx=mapWidth/regionX,regionSy=mapHeight/regionY;
     for(i=0;i<regionX;i++) {
       for(j=0;j<regionY;j++) {
-        addEntity(new Region(world,map,regionSx,regionSy,i*regionSx,j*regionSy,camera));
+        add(new Region(world,map,regionSx,regionSy,i*regionSx,j*regionSy,camera));
       }
+    }
+  }
+  public void computationalIllumination(float illuminationAttenuationCoefficient) {
+    for(var region:sons) {
+      region.computationalIllumination(illuminationAttenuationCoefficient);
     }
   }
 

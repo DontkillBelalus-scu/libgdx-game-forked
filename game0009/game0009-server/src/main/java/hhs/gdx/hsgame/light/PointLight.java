@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class PointLight extends BasicLight{
 
   Mesh lightMesh;
+  float intensity=0.5f;
   float[] vertices=new float[20];
   Color lightColor=Color.WHITE;
 
@@ -24,63 +25,68 @@ public class PointLight extends BasicLight{
       new VertexAttribute(Usage.TextureCoordinates,2,"coord"));
   }
 
+  public void setRadiu(float radiu) {
+    size.set(radiu*2,radiu*2);
+  }
+  public void setIntensity(float intensity) {
+    this.intensity=intensity;
+  }
+
   @Override
   public void dispose() {}
 
   @Override
   public void render(SpriteBatch batch) {
     int idx=0;
-    //    vertices[idx++]=pos.x;
-    //    vertices[idx++]=pos.y;
-    //    vertices[idx++]=0;
-    //    vertices[idx++]=0;
-    //    vertices[idx++]=0;
-    //    
-    //    vertices[idx++]=pos.x;
-    //    vertices[idx++]=pos.y+size.y;
-    //    vertices[idx++]=0;
-    //    vertices[idx++]=0;
-    //    vertices[idx++]=1;
-    //    
-    //    vertices[idx++]=pos.x+size.x;
-    //    vertices[idx++]=pos.y+size.y;
-    //    vertices[idx++]=0;
-    //    vertices[idx++]=1;
-    //    vertices[idx++]=0;
-    //    
-    //    vertices[idx++]=pos.x+size.x;
-    //    vertices[idx++]=pos.y;
-    //    vertices[idx++]=0;
-    //    vertices[idx++]=1;
-    //    vertices[idx++]=1;
-    batch.end();
+    vertices[idx++]=pos.x;
+    vertices[idx++]=pos.y;
+    vertices[idx++]=0;
+    vertices[idx++]=0;
+    vertices[idx++]=0;
+
+    vertices[idx++]=pos.x+size.x;
+    vertices[idx++]=pos.y;
+    vertices[idx++]=0;
+    vertices[idx++]=1;
+    vertices[idx++]=0;
+
+    vertices[idx++]=pos.x+size.x;
+    vertices[idx++]=pos.y+size.y;
+    vertices[idx++]=0;
+    vertices[idx++]=1;
+    vertices[idx++]=1;
+
+    vertices[idx++]=pos.x;
+    vertices[idx++]=pos.y+size.y;
+    vertices[idx++]=0;
+    vertices[idx++]=0;
+    vertices[idx++]=1;
     idx=0;
-    vertices[idx++]=-1;
-    vertices[idx++]=-1;
-    vertices[idx++]=0;
-    vertices[idx++]=0;
-    vertices[idx++]=0;
-
-    vertices[idx++]=1;
-    vertices[idx++]=-1;
-    vertices[idx++]=0;
-    vertices[idx++]=1;
-    vertices[idx++]=0;
-
-    vertices[idx++]=1;
-    vertices[idx++]=1;
-    vertices[idx++]=0;
-    vertices[idx++]=1;
-    vertices[idx++]=1;
-
-    vertices[idx++]=-1;
-    vertices[idx++]=1;
-    vertices[idx++]=0;
-    vertices[idx++]=0;
-    vertices[idx++]=1;
+    //    vertices[idx++]=-1;
+    //    vertices[idx++]=-1;
+    //    vertices[idx++]=0;
+    //    vertices[idx++]=0;
+    //    vertices[idx++]=0;
+    //
+    //    vertices[idx++]=1;
+    //    vertices[idx++]=-1;
+    //    vertices[idx++]=0;
+    //    vertices[idx++]=1;
+    //    vertices[idx++]=0;
+    //
+    //    vertices[idx++]=1;
+    //    vertices[idx++]=1;
+    //    vertices[idx++]=0;
+    //    vertices[idx++]=1;
+    //    vertices[idx++]=1;
+    //
+    //    vertices[idx++]=-1;
+    //    vertices[idx++]=1;
+    //    vertices[idx++]=0;
+    //    vertices[idx++]=0;
+    //    vertices[idx++]=1;
+    lcenter.mLightShader.setUniformf("intensity",intensity);
     lightMesh.setVertices(vertices);
-    lcenter.ready();
     lightMesh.render(lcenter.mLightShader,GL20.GL_TRIANGLE_FAN);
-    batch.begin();
   }
 }
