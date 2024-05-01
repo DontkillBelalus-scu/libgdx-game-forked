@@ -21,47 +21,50 @@ public class PointLight extends BasicLight{
       false,
       4,
       0,
-      new VertexAttribute(Usage.Position,3,"a_position"),
+      new VertexAttribute(Usage.Position,2,"a_position"),
       new VertexAttribute(Usage.TextureCoordinates,2,"coord"));
   }
 
   public void setRadiu(float radiu) {
     size.set(radiu*2,radiu*2);
   }
+
   public void setIntensity(float intensity) {
     this.intensity=intensity;
   }
 
   @Override
-  public void dispose() {}
+  public void dispose() {
+    if(lightMesh!=null) lightMesh.dispose();
+  }
 
   @Override
   public void render(SpriteBatch batch) {
     int idx=0;
     vertices[idx++]=pos.x;
     vertices[idx++]=pos.y;
-    vertices[idx++]=0;
+    // vertices[idx++]=0;
     vertices[idx++]=0;
     vertices[idx++]=0;
 
     vertices[idx++]=pos.x+size.x;
     vertices[idx++]=pos.y;
-    vertices[idx++]=0;
+    // vertices[idx++]=0;
     vertices[idx++]=1;
     vertices[idx++]=0;
 
     vertices[idx++]=pos.x+size.x;
     vertices[idx++]=pos.y+size.y;
-    vertices[idx++]=0;
+    // vertices[idx++]=0;
     vertices[idx++]=1;
     vertices[idx++]=1;
 
     vertices[idx++]=pos.x;
     vertices[idx++]=pos.y+size.y;
-    vertices[idx++]=0;
+    // vertices[idx++]=0;
     vertices[idx++]=0;
     vertices[idx++]=1;
-    idx=0;
+    // idx=0;
     //    vertices[idx++]=-1;
     //    vertices[idx++]=-1;
     //    vertices[idx++]=0;
@@ -86,7 +89,17 @@ public class PointLight extends BasicLight{
     //    vertices[idx++]=0;
     //    vertices[idx++]=1;
     lcenter.mLightShader.setUniformf("intensity",intensity);
-    lightMesh.setVertices(vertices);
+    lcenter.mLightShader.setUniformf(
+      "l_color",lightColor.r,lightColor.g,lightColor.b,lightColor.a);
+    lightMesh.setVertices(vertices,0,idx);
     lightMesh.render(lcenter.mLightShader,GL20.GL_TRIANGLE_FAN);
+  }
+
+  public Color getLightColor() {
+    return this.lightColor;
+  }
+
+  public void setLightColor(Color lightColor) {
+    this.lightColor=lightColor;
   }
 }

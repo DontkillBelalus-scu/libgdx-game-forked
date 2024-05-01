@@ -140,7 +140,7 @@ public class Protagonist extends Character<Character.State,Protagonist> implemen
   @Override
   public Protagonist getHurt(float damage,Attachable attack) {
     data.hp-=damage;
-    newNumLabel(1);
+    newNumLabel((int)damage);
     if(autoFilp&&attack instanceof Character c) direct=tp.set(c.pos).scl(pos).x>0?false:true;
     animation.state(State.hurt);
     return this;

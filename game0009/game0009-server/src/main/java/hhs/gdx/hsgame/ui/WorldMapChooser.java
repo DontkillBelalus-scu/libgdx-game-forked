@@ -16,7 +16,7 @@ import hhs.gdx.hsgame.tools.Resource;
 public class WorldMapChooser extends Actor{
   Texture point=PixmapBuilder.getCircle(50,ColorTool.乳白);
   public BitmapFont font;
-  float fontScale=1,pointSize=50,interval=Resource.u*2;
+  float fontScale=1,pointSize=100,interval=Resource.u*2;
   public Array<Node> nodes=new Array<>();
 
   public WorldMapChooser() {

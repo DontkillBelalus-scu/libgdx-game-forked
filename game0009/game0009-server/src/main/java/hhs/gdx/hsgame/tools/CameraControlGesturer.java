@@ -6,12 +6,15 @@ import com.badlogic.gdx.input.GestureDetector;
 public class CameraControlGesturer extends GestureDetector.GestureAdapter{
   public OrthographicCamera cam;
   float zoom=0;
+  float maxScale=6,minScale=0.05f;
   public CameraControlGesturer(OrthographicCamera cam) {
     this.cam=cam;
   }
   @Override
   public boolean zoom(float initialDistance,float distance) {
     cam.zoom=zoom*initialDistance/distance;
+    cam.zoom=cam.zoom<minScale?minScale:cam.zoom;
+    cam.zoom=cam.zoom>maxScale?maxScale:cam.zoom;
     return false;
   }
   @Override

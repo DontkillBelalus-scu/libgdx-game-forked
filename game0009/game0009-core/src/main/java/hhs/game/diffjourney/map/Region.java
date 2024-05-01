@@ -25,13 +25,15 @@ public class Region extends BasicEntity implements Collision{
   public Vector2 safe=new Vector2();
   public World<Rect> world;
   OrthographicCamera cam;
-  // public QuadTree<Block> quad;
   public char[][] map;
   public double[][] fovmap;
   Block[][] blocks;
   int fx,fy,msx,msy;
   boolean isAdd=false;
+  boolean enableLight=true;
   float illuminationAttenuationCoefficient=0.09375f;
+  public int blockSize=50;
+
   public Region(
     World<Rect> world,char[][] map,int msx,int msy,int fx,int fy,OrthographicCamera cam) {
     blocks=new Block[msx][msy];
@@ -45,17 +47,20 @@ public class Region extends BasicEntity implements Collision{
     if((fx+msx>map.length)||(fy+msy>map[0].length)) {
       throw new GdxRuntimeException("out of index:map");
     }
-    pos.set(fx*50,fy*50);
-    size.set(msx*50,msy*50);
+    pos.set(fx*blockSize,fy*blockSize);
+    size.set(msx*blockSize,msy*blockSize);
     // quad=new QuadTree<>(pos,size);
   }
+
   public Region(
     World<Rect> world,char[][] map,int msize,int fx,int fy,OrthographicCamera cam) {
     this(world,map,msize,msize,fx,fy,cam);
   }
+
   public void setFov(double[][] map) {
     fovmap=map;
   }
+
   void clearBlock() {
     isAdd=false;
     for(int i=0;i<blocks.length;i++) {
@@ -63,14 +68,15 @@ public class Region extends BasicEntity implements Collision{
     }
     Arrays.fill(blocks,null);
   }
-  public void computationalIllumination(float illuminationAttenuationCoefficient) {
+
+  public void computationalIllumination(float ambient,float illuminationAttenuationCoefficient) {
     if(blocks[0][0]==null) {
       this.illuminationAttenuationCoefficient=illuminationAttenuationCoefficient;
       return;
     }
     for(int i=fx;i<msx+fx;i++) {
       for(int j=fy;j<msy+fy;j++) {
-        float tmp=1;
+        float tmp=ambient;
         for(int a=0;a<8;a++) {
           if(getChar(i+fmove[a*2],j+fmove[a*2+1])=='#') tmp-=illuminationAttenuationCoefficient;
         }
@@ -78,13 +84,20 @@ public class Region extends BasicEntity implements Collision{
       }
     }
   }
+
+  public void computationalIllumination(float illuminationAttenuationCoefficient) {
+    computationalIllumination(1,illuminationAttenuationCoefficient);
+  }
+
   public static short[] fmove= {0,1,1,1,1,0,1,-1,0,-1,-1,-1,-1,0,-1,1};
+
   public char getChar(int x,int y) {
     if(x>=0&&y>=0&&x<map.length&&y<map[x].length) {
       return map[x][y];
     }
     return ' ';
   }
+
   void addBlock(char[][] map) {
     isAdd=true;
     int i,j;
@@ -97,7 +110,7 @@ public class Region extends BasicEntity implements Collision{
     for(i=fx;i<msx+fx;i++) {
       for(j=fy;j<msy+fy;j++) {
         Block b=Block.pool.obtain();
-        // b.pos.set(i * 50,j * 50);
+        blocks[i-fx][j-fy]=b;
         switch(map[i][j]) {
           case '#':
             if(j>0&&map[i][j-1]=='#') {
@@ -105,11 +118,11 @@ public class Region extends BasicEntity implements Collision{
               if(check(map,i-1,j)!='#'
                 ||check(map,i+1,j)!='#'
                 ||check(map,i,j+1)!='#') {
-                world.add(new Item<>(b),i*50,j*50,b.getWidth(),b.getHeight());
+                world.add(new Item<>(b),i*blockSize,j*blockSize,b.getWidth(),b.getHeight());
               }
             }else {
               b.setT(wall);
-              world.add(new Item<>(b),i*50,j*50+30,50,20);
+              world.add(new Item<>(b),i*blockSize,j*blockSize+30,blockSize,20);
             }
             break;
           case '~':
@@ -124,15 +137,16 @@ public class Region extends BasicEntity implements Collision{
           default:
             b.setT(ta.findRegion("floor"+MathUtils.random(1,8)));
         }
+        if(!enableLight) continue;
         float tmp=1;
         for(int a=0;a<8;a++) {
           if(getChar(i+fmove[a*2],j+fmove[a*2+1])=='#') tmp-=illuminationAttenuationCoefficient;
         }
         b.c=tmp;
-        blocks[i-fx][j-fy]=b;
       }
     }
   }
+
   public static char check(char[][] map,int x,int y) {
     if(x<0||x>=map.length||y<0||y>=map[0].length) {
       return ' ';
@@ -140,30 +154,33 @@ public class Region extends BasicEntity implements Collision{
       return map[x][y];
     }
   }
+
   int max(int a,int b) {
     return a>b?a:b;
   }
+
   int min(int a,int b) {
     return a>b?b:a;
   }
+
   int fixX(float n) {
     int tmp=(int)n;
     tmp=tmp>pos.x?tmp-(int)pos.x:0;
-    return min(tmp/50,msx-1);
+    return min(tmp/blockSize,msx-1);
   }
+
   int fixY(float n) {
     int tmp=(int)n;
     tmp=tmp>pos.y?tmp-(int)pos.y:0;
-    return min(tmp/50,msy-1);
+    return min(tmp/blockSize,msy-1);
   }
+
   @Override
-  public void render(SpriteBatch batch) {}
-  @Override
-  public void UpdateAndRender(SpriteBatch batch,float delta) {
+  public void render(SpriteBatch batch) {
     if(EntityTool.testBoundInCamera(this,cam)) {
       if(!isAdd) addBlock(map);
     }else {
-      //if (isAdd) clearBlock();
+      // if (isAdd) clearBlock();
       return;
     }
     Rectangle rect=CameraTool.getCameraRect(cam);
@@ -175,20 +192,32 @@ public class Region extends BasicEntity implements Collision{
         Block b=blocks[i][j];
         if(b==null) continue;
         batch.setColor(b.c,b.c,b.c,1);
-        batch.draw(b.t,(i+this.fx)*50,(j+this.fy)*50,50,50);
+        batch.draw(b.t,(i+this.fx)*blockSize,(j+this.fy)*blockSize,blockSize,blockSize);
       }
     }
     batch.setColor(Color.WHITE);
   }
+
   Rectangle r=new Rectangle();
+
   @Override
   public World<Rect> getCollisions() {
     return world;
   }
+
   @Override
   public void debugDraw(ShapeRenderer sr) {
     sr.rect(pos.x,pos.y,size.x,size.y);
   }
+
   @Override
   public void dispose() {}
+
+  public boolean getEnableLight() {
+    return this.enableLight;
+  }
+
+  public void setEnableLight(boolean enableLight) {
+    this.enableLight=enableLight;
+  }
 }

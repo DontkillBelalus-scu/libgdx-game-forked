@@ -12,12 +12,13 @@ import hhs.gdx.hsgame.tools.CameraTool;
 import hhs.gdx.hsgame.util.Rect;
 import squidpony.squidgrid.mapping.FlowingCaveGenerator;
 import java.util.HashMap;
+import squidpony.squidmath.RNG;
 
 public class InfiniteMap extends BasicEntity implements Collision,EntityLayers.Stackable{
   World<Rect> world;
   Protagonist character;
   OrthographicCamera camera;
-  int regionWidth=100,regionHeight=100;
+  final int regionWidth=100,regionHeight=100,blockSize=50;
   FlowingCaveGenerator mapGenerator;
   public HashMap<Vector2,InfiniteRegion> regions;
   Thread addRegionThread;
@@ -28,7 +29,7 @@ public class InfiniteMap extends BasicEntity implements Collision,EntityLayers.S
   }
   public InfiniteMap(OrthographicCamera camera,Protagonist character) {
     regions=new HashMap<>();
-    world=new World<>(50);
+    world=new World<>(blockSize);
     this.camera=camera;
     cam=camera;
     this.character=character;
@@ -56,14 +57,14 @@ public class InfiniteMap extends BasicEntity implements Collision,EntityLayers.S
 
   void moveRange(Vector2 p) {
     p.set(
-      50*regionWidth*(int)(p.x/(regionWidth*50))-regionWidth*25,
-      50*regionHeight*(int)(p.y/(regionHeight*50))-regionHeight*25);
+      blockSize*regionWidth*(int)(p.x/(regionWidth*blockSize))-regionWidth*blockSize/2,
+      blockSize*regionHeight*(int)(p.y/(regionHeight*blockSize))-regionHeight*blockSize/2);
   }
   public void addRegion(float x,float y) {
     Vector2 opos=new Vector2(x,y);
     moveRange(opos);
     for(int i=0;i<9;i++) {
-      Vector2 cpos=new Vector2(opos).add(side[i][0]*regionWidth*50,side[i][1]*regionHeight*50);
+      Vector2 cpos=new Vector2(opos).add(side[i][0]*regionWidth*blockSize,side[i][1]*regionHeight*blockSize);
       if(regions.containsKey(cpos)) {
         continue;
       }
@@ -72,16 +73,18 @@ public class InfiniteMap extends BasicEntity implements Collision,EntityLayers.S
       region.cam=camera;
       region.screen=screen;
       regions.put(cpos,region);
+      mapGenerator.rng=new RNG(cpos.hashCode());
       region.set(cpos,new Vector2(regionWidth,regionHeight),mapGenerator.generate());
     }
   }
   public void addRegion() {
     float cw=CameraTool.getCamWidth(cam)/2;
     float ch=CameraTool.getCamHeight(cam)/2;
-    addRegion(camera.position.x-cw,camera.position.y-ch);
-    addRegion(camera.position.x-cw,camera.position.y+ch);
-    addRegion(camera.position.x+cw,camera.position.y-ch);
-    addRegion(camera.position.x+cw,camera.position.y+ch);
+    for(float x=camera.position.x-cw;x<camera.position.x+cw;x+=regionWidth*blockSize) {
+      for(float y=camera.position.y-ch;y<camera.position.y+ch;y+=regionHeight*blockSize) {
+        addRegion(x,y);
+      }
+    }
   }
 
   @Override

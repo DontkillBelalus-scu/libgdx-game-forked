@@ -1,17 +1,13 @@
 package hhs.game.diffjourney.map;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import hhs.gdx.hsgame.tools.PixmapBuilder;
 import hhs.gdx.hsgame.util.Rect;
 
 public class Block implements Pool.Poolable,Rect{
-  public static Pool<Block> pool=Pools.get(Block.class);
-  public static Texture shadow=PixmapBuilder.getRectangle(50,50,new Color(1,1,1,1f));
+  public static final Pool<Block> pool=Pools.get(Block.class);
   public TextureRegion t;
   OrthographicCamera cam;
   int nx,ny;

@@ -1,22 +1,22 @@
 <anim>
 <walk
-    texture="Mushroom/Run.png"
+    texture="Skeleton/Run.png"
     time="0.2"
-    columns="8" />
+    columns="4" />
   <idle
-    texture="Mushroom/Idle.png"
+    texture="Skeleton/Idle.png"
     time="0.4"
     columns="4" />
   <attack
-    texture="Mushroom/Attack.png"
+    texture="Skeleton/Attack.png"
     time="0.1"
     columns="8" />
   <hurt
-    texture="Mushroom/Hit.png"
+    texture="Skeleton/Hit.png"
     time="0.2"
     columns="4" />
   <death
-    texture="Mushroom/Death.png"
+    texture="Skeleton/Death.png"
     time="0.2"
     columns="4" />
-</anim>
+    </anim>

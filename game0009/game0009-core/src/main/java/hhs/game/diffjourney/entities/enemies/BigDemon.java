@@ -12,13 +12,13 @@ import hhs.gdx.hsgame.tools.Resource;
 import hhs.gdx.hsgame.tools.TextureTool;
 
 public class BigDemon extends Enemy1{
-  public static Pool<BigDemon> pool=new Pool<>() {
+  public static final Pool<BigDemon> pool=new Pool<>() {
     @Override
     public BigDemon newObject() {
       return new BigDemon();
     }
   };
-  public static AnimationSet<Character.State,TextureRegion> animData=new AnimationSet<>();
+  public static final AnimationSet<Character.State,TextureRegion> animData=new AnimationSet<>();
   static {
     Pools.set(BigDemon.class,pool);
     TextureAtlas atlas=Resource.asset.get("textures/character.atlas");

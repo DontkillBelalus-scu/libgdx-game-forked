@@ -6,30 +6,33 @@ import com.badlogic.gdx.utils.Pools;
 import hhs.game.diffjourney.util.XmlAnimationLoader;
 import hhs.gdx.hsgame.tools.AnimationSet;
 
-public class Mushroom extends Enemy1{
-  public static final Pool<Mushroom> pool=new Pool<>() {
+public class Goblin extends Enemy1{
+  public static final Pool<Goblin> pool=new Pool<>() {
     @Override
-    public Mushroom newObject() {
-      return new Mushroom();
+    public Goblin newObject() {
+      return new Goblin();
     }
   };
-  public static final AnimationSet<Character.State,TextureRegion> animData=XmlAnimationLoader.getAnimationSet("Mushroom.xml");
+  public static final AnimationSet<Character.State,TextureRegion> animData=XmlAnimationLoader.getAnimationSet("Goblin.xml");
   static {
-    Pools.set(Mushroom.class,pool);
+    Pools.set(Goblin.class,pool);
   }
   public static AnimationSet<Character.State,TextureRegion> init() {
     var anim=new AnimationSet<Character.State,TextureRegion>();
     anim.setData(animData);
     return anim;
   }
-  public Mushroom() {
+  public Goblin() {
     super(init());
+    speed=150;
+    data.hp=data.maxHp=150;
     size.set(20*1.5f,30*1.5f).scl(2);
     setTransformer((p,s)-> {
       p.set(pos.x-2*size.x,pos.y-size.y);
       s.set(size.x*5,size.x*5);
     });
   }
+
   @Override
   public void remove() {
     pool.free(this);

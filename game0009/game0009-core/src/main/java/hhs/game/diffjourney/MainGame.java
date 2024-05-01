@@ -53,13 +53,32 @@ public class MainGame extends Game{
     loadTexture("dian.png");
     loadTexture("pao.png");
     loadTexture("bullet.png");
+    loadTexture("praticle/praticle1.png");
+    loadTexture("praticle/praticle2.png");
+
     loadTexture("Mushroom/Run.png");
     loadTexture("Mushroom/Idle.png");
     loadTexture("Mushroom/Hit.png");
     loadTexture("Mushroom/Attack.png");
     loadTexture("Mushroom/Death.png");
-    loadTexture("praticle/praticle1.png");
-    loadTexture("praticle/praticle2.png");
+
+    loadTexture("FlyingEye/Idle.png");
+    loadTexture("FlyingEye/Hit.png");
+    loadTexture("FlyingEye/Attack.png");
+    loadTexture("FlyingEye/Death.png");
+
+    loadTexture("Goblin/Run.png");
+    loadTexture("Goblin/Idle.png");
+    loadTexture("Goblin/Hit.png");
+    loadTexture("Goblin/Attack.png");
+    loadTexture("Goblin/Death.png");
+
+    loadTexture("Skeleton/Run.png");
+    loadTexture("Skeleton/Idle.png");
+    loadTexture("Skeleton/Hit.png");
+    loadTexture("Skeleton/Attack.png");
+    loadTexture("Skeleton/Death.png");
+
   }
   public void loadTexture(String fileName) {
     asset.load(fileName,Texture.class);

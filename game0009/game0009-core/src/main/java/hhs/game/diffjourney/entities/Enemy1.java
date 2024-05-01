@@ -22,7 +22,7 @@ import hhs.gdx.hsgame.tools.EntityTool;
 import hhs.gdx.hsgame.util.Rect;
 import squidpony.squidmath.Coord;
 
-public class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
+public abstract class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
   implements Character.Attachable,Character.CanBeHurt<Enemy1>,Pool.Poolable{
   PercentageDisplay hpViewer=new PercentageDisplay(()->(data.hp/(float)data.maxHp));
   public static FlashShader fshader=new FlashShader();
@@ -56,7 +56,7 @@ public class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
   }
 
   public void reset() {
-    data.hp=100;
+    data.hp=data.maxHp;
   }
 
   @Override
@@ -168,7 +168,7 @@ public class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
       if(rect.overlaps(Rectangle.tmp.set(pro.pos.x,pro.pos.y,pro.size.x,pro.size.y))) {
         state=State.attack;
         move=false;
-        pro.getHurt(1,this);
+        pro.getHurt(data.damage,this);
       }else {
         move=true;
         if(state!=State.hurt&&state!=State.death) state=State.idle;

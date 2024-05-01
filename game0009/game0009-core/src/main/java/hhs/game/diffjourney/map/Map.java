@@ -20,7 +20,7 @@ import squidpony.squidgrid.mapping.FlowingCaveGenerator;
 public class Map extends EntityCenter<Region> implements Collision,AvailableMap,EntityLayers.Stackable{
   int mapWidth,mapHeight;
   int regionX,regionY;
-  int blockWidth=50,blockHeight=50;
+  int blockSize=50;
   public char map[][];
   public double fovmap[][];
   OrthographicCamera camera;
@@ -39,7 +39,7 @@ public class Map extends EntityCenter<Region> implements Collision,AvailableMap,
 
   public Map(char[][] map,int regionX,int regionY,OrthographicCamera camera) {
     super(regionX*regionY);
-    world=new World<>(50f);
+    world=new World<>(blockSize);
     this.mapWidth=map.length;
     this.mapHeight=map[0].length;
     this.regionX=regionX;
