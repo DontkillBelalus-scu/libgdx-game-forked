@@ -21,16 +21,7 @@ public class LightCenter extends EntityCenter<BasicLight> implements EntityLayer
   private final TextureRegion lightsBufferRegion=new TextureRegion();
   public LightCenter() {
     mLightShader=new ShaderProgram(
-      """
-        uniform mat4 u_projTrans;
-        varying vec2 f_coord;
-        attribute vec2 coord;
-        attribute vec2 a_position;
-        void main(){
-          f_coord=coord;
-          gl_Position = u_projTrans*vec4(a_position.xy,0.,1.);
-        }
-        """,
+      Gdx.files.internal("glsl/vert.glsl").readString(),
       """
         precision mediump float;
         uniform vec4 l_color;
@@ -66,6 +57,7 @@ public class LightCenter extends EntityCenter<BasicLight> implements EntityLayer
 
   public void dispose() {
     mLightShader.dispose();
+    super.dispose();
   }
   public void render(SpriteBatch batch) {
     ready();

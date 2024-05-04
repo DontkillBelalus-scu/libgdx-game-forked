@@ -1,6 +1,7 @@
 package hhs.game.diffjourney;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
@@ -8,6 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import hhs.game.diffjourney.screens.LoadingScreen;
 import hhs.game.diffjourney.screens.MainScreen;
 import hhs.game.diffjourney.ui.UiList;
@@ -22,11 +26,18 @@ public class MainGame extends Game{
   AssetManager asset;
   BasicLoader basicLoader;
   static LoadingScreen loadScreen;
+  Viewport viewport;
+
   @Override
   public void create() {
     res=new Resource(this);
     res.asset=new GameAssetManager();
     res.init();
+
+    if(Resource.width<1920) viewport=new ScalingViewport(Scaling.fit,1920,1080);
+    else viewport=new ScalingViewport(Scaling.fillY,Resource.width,Resource.height);
+    viewport.apply();
+
     asset=res.asset;
     load();
     setScreen(basicLoader=new BasicLoader(asset,MainScreen.class));
@@ -84,6 +95,12 @@ public class MainGame extends Game{
     asset.load(fileName,Texture.class);
   }
   @Override
+  public void setScreen(Screen arg0) {
+    super.setScreen(arg0);
+    viewport.apply();
+  }
+
+  @Override
   public void dispose() {
     super.dispose();
     res.dispose();
@@ -95,6 +112,7 @@ public class MainGame extends Game{
     super.resize(arg0,arg1);
     Resource.width=arg0;
     Resource.height=arg1;
+    viewport.update(arg0,arg1);
     // TODO: Implement this method
   }
 }

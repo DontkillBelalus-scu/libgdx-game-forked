@@ -37,10 +37,14 @@ public class DesktopMouseControler extends Entity implements InputProcessor{
   }
   @Override
   public boolean touchDragged(int screenX,int screenY,int pointer) {
+    pos.set(screenX,screenY).sub(Resource.width/2,Resource.height/2).nor();
     return false;
   }
   @Override
   public boolean mouseMoved(int screenX,int screenY) {
+    if(down) {
+      pos.set(screenX,screenY).sub(Resource.width/2,Resource.height/2).nor();
+    }
     return false;
   }
   @Override

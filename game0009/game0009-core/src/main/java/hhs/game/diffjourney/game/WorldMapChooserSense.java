@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import hhs.game.diffjourney.interoperable.ChooseWindow;
 import hhs.game.diffjourney.screens.GameScreen;
 import hhs.game.diffjourney.ui.UiList;
@@ -47,6 +48,15 @@ public class WorldMapChooserSense extends GameScreen{
   }
 
   public Runnable tip(String description,Class<? extends BasicScreen> cscreen) {
-    return ()->stage.addActor(new ChooseWindow(description,null,()->Resource.setScreen(cscreen)));
+    return ()-> {
+      var window=new ChooseWindow(description,null,()->Resource.setScreen(cscreen));
+      window.setPosition(window.getX(),-window.getHeight());
+      window.addAction(
+        Actions.moveTo(
+          Resource.width/2-window.getWidth()/2,
+          Resource.height/2-window.getHeight()/2,
+          0.25f));
+      stage.addActor(window);
+    };
   }
 }

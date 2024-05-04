@@ -18,6 +18,7 @@ public abstract class BasicEntity extends Entity implements Rect{
     size=new Vector2();
     center=new Vector2();
   }
+
   @Override
   public void update(float delta) {}
   @Override

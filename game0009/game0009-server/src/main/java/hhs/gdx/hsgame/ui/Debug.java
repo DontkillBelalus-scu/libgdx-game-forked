@@ -39,8 +39,8 @@ public class Debug extends Table{
           /(1024*1024);
         sb.append("Used memory: "+memory+"MB\n");
         sb.append("FPS:"+Gdx.graphics.getFramesPerSecond());
-        lc=c;
-        ldc=dc;
+        lc+=(int)((float)(c-lc)/4);
+        ldc+=(int)((float)(ldc-dc)/4);
         return sb.toString();
       });
   }

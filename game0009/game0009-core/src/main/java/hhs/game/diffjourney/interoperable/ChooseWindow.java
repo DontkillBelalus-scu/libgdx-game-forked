@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Null;
 import hhs.game.diffjourney.ui.PixelFontButton;
@@ -37,6 +38,13 @@ public class ChooseWindow extends Table{
     button.addListener(ListenerBuilder.touch(()->remove()));
     add(button);
   }
+
+  @Override
+  public boolean remove() {
+    addAction(Actions.sequence(Actions.moveTo(getX(),-getHeight(),0.25f),Actions.removeActor()));
+    return true;
+  }
+
   @Override
   public void draw(Batch batch,float arg1) {
     super.draw(batch,arg1);

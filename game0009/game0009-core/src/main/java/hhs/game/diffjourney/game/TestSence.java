@@ -76,7 +76,7 @@ public class TestSence extends GameScreen{
       addEntity(ctrl);
       var attackControler=new DesktopMouseControler(attack);
       input.addProcessor(attackControler);
-      entities.add(attackControler);
+      addEntity(attackControler);
     }else {
       stage.addActor(
         new Controller(

@@ -4,6 +4,7 @@ import hhs.game.diffjourney.entities.Protagonist;
 import hhs.game.diffjourney.interoperable.TestInteroperable;
 import hhs.game.diffjourney.map.Map;
 import hhs.game.diffjourney.screens.GameScreen;
+import hhs.game.diffjourney.vfx.GlobalFog;
 import hhs.gdx.hsgame.tools.ColorTool;
 import hhs.gdx.hsgame.tools.EntityTool;
 import squidpony.squidmath.RNG;
@@ -25,5 +26,9 @@ public class HomeSense extends GameScreen{
     protagonist.setCurr(m);
 
     addEntity(new TestInteroperable(EntityTool.providePosition(protagonist)));
+
+    var fog=new GlobalFog();
+    addEntity(fog);
+
   }
 }
