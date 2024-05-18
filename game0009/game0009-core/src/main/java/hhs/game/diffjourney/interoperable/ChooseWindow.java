@@ -3,6 +3,7 @@ package hhs.game.diffjourney.interoperable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -37,11 +38,14 @@ public class ChooseWindow extends Table{
     button.addListener(ListenerBuilder.touch(callback));
     button.addListener(ListenerBuilder.touch(()->remove()));
     add(button);
+
+    setPosition(getX(),-getHeight());
+    addAction(Actions.moveTo(getX(),(Resource.height-getHeight())/2,0.25f,Interpolation.smoother));
   }
 
   @Override
   public boolean remove() {
-    addAction(Actions.sequence(Actions.moveTo(getX(),-getHeight(),0.25f),Actions.removeActor()));
+    addAction(Actions.sequence(Actions.moveTo(getX(),-getHeight(),0.25f,Interpolation.smoother),Actions.removeActor()));
     return true;
   }
 

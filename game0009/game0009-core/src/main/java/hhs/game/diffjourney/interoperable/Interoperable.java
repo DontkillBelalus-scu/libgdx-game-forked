@@ -3,7 +3,9 @@ package hhs.game.diffjourney.interoperable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import hhs.game.diffjourney.ui.PixelFontButton;
 import hhs.gdx.hsgame.entities.BasicEntity;
 import hhs.gdx.hsgame.entities.EntityLayers;
@@ -24,6 +26,15 @@ public abstract class Interoperable extends BasicEntity implements EntityLayers.
 
   public void addListener(EventListener el) {
     interactive.addListener(el);
+  }
+
+  public void addClick(Runnable run) {
+    interactive.addListener(
+      new ClickListener() {
+        public void clicked(InputEvent event,float x,float y) {
+          run.run();
+        }
+      });
   }
 
   @Override

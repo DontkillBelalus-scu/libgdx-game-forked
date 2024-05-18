@@ -147,10 +147,11 @@ public abstract class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
   public void render(SpriteBatch batch) {
     if(EntityTool.testBoundInCamera(this,cam)) {
       if(state==State.hurt) {
-
+        batch.setShader(fshader.program);
+        fshader.program.bind();
+        fshader.setTime(ftime+=Gdx.graphics.getDeltaTime());
       }
-      fshader.setTime(ftime+=Gdx.graphics.getDeltaTime());
-      batch.setShader(fshader.program);
+
       dpos.set(pos);
       dsize.set(size);
       transformer.transform(dpos,dsize);

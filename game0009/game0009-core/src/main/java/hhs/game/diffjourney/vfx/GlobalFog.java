@@ -45,7 +45,7 @@ public class GlobalFog extends BasicEntity implements EntityLayers.Stackable{
     vertices[idx++]=0;
     vertices[idx++]=1;
 
-    fogMesh=new Mesh(false,
+    fogMesh=new Mesh(true,
       4,
       0,
       new VertexAttribute(Usage.Position,2,"a_position"),
@@ -61,6 +61,8 @@ public class GlobalFog extends BasicEntity implements EntityLayers.Stackable{
 
   @Override
   public void render(SpriteBatch batch) {
+    //Gdx.gl20.glEnable(GL20.GL_BLEND);
+    //Gdx.gl20.glBlendFunc(GL20.GL_SRC_ALPHA,GL20.GL_ONE);
     shader.bind();
     shader.setUniformf("resolution",cam.viewportWidth,cam.viewportHeight);
     shader.setUniformf("time",time);

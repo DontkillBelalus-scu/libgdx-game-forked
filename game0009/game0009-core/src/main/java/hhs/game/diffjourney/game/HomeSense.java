@@ -27,6 +27,8 @@ public class HomeSense extends GameScreen{
 
     addEntity(new TestInteroperable(EntityTool.providePosition(protagonist)));
 
+    //var woker=new Interoperable(EntityTool.providePosition(protagonist));
+
     var fog=new GlobalFog();
     addEntity(fog);
 

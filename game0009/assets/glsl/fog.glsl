@@ -100,6 +100,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 void main(void) {
 	vec4 fragment_color;
 	mainImage(fragment_color, f_coord.xy);
-  fragment_color.a=fragment_color.r;
-	gl_FragColor=fragment_color;
+	gl_FragColor=vec4(fragment_color.rgbr);
 }

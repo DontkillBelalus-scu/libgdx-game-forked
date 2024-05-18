@@ -12,6 +12,6 @@ void main (void) {
     else{
     vec4 whiteMask = vec4(1.0, 1.0, 1.0, 1.0);
     float amplitude = abs(sin(time * (PI / duration)));
-    gl_FragColor = mask * (1.0 - amplitude) + whiteMask * amplitude;
+    gl_FragColor = mask.a*vec4((1.0 - amplitude) + whiteMask * amplitude);
     }
 }
