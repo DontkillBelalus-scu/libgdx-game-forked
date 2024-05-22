@@ -67,7 +67,7 @@ public class StartScreen implements Screen{
   public StartScreen() {
     batch=FallGuys.modelBatch;
 
-    cam=new PerspectiveCamera(67, Constant.width,Constant.height);
+    cam=new PerspectiveCamera(67,Constant.width,Constant.height);
     cam.near=1;
     cam.far=300;
     cam.position.set(10,7,-5);

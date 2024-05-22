@@ -1,5 +1,7 @@
 package com.games.ui;
 
+import hhs.app.hsgametest.PeriodicEnter;
+import hhs.app.hsgametest.PhysicalEnter;
 import hhs.game.airplane.AirPlaneWar;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ import hhs.game.doomlibgdx.MainGame;
 import hhs.game.hanoi.HanoiLauncher;
 import hhs.game.ball.balance.FallGuys;
 import pama1234.gdx.game.app.Screen0037;
+import pama1234.gdx.launcher.MainApp;
 import pama1234.gdx.util.launcher.MainAppBase;
 
 /**
@@ -71,7 +74,7 @@ public class HomeFragment extends Fragment{
       list=new ArrayList<>();
       // 第一个数据是标题，第二个数据是游戏主类
       //      list.add(new ItemData("空想世界",MainApp0011.class));
-      list.add(new ItemData("填满正方形",MainApp0037.class));
+      list.add(new ItemData("填满正方形",MainApp.class));
       list.add(new ItemData("测试游戏1",ShaderTest.class));
       list.add(new ItemData("测试游戏2",MainGame.class));
       list.add(new ItemData("汉诺塔",HanoiLauncher.class));
@@ -81,6 +84,8 @@ public class HomeFragment extends Fragment{
       list.add(new ItemData("3d平衡球",FallGuys.class));
       list.add(new ItemData("随机地图",hhs.game.lost.games.voxel.VoxelTest.class));
       list.add(new ItemData("飞机大战",AirPlaneWar.class).setLandscape(false));
+      list.add(new ItemData("化学周期表",PeriodicEnter.class));
+      list.add(new ItemData("物理简单模拟",PhysicalEnter.class));
     }
 
     @Override

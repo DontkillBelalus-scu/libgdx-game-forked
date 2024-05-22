@@ -26,8 +26,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 
-import hhs.game.ball.balance.FallGuys;
-import hhs.game.ball.balance.GameScreen;
 import hhs.game.lost.games.Constant;
 import hhs.game.lost.games.GameObject;
 import hhs.game.lost.games.MyInputListener;

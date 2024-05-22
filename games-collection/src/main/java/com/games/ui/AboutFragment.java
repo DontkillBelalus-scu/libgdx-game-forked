@@ -12,7 +12,6 @@ public class AboutFragment extends Fragment{
   @Override
   public View onCreateView(LayoutInflater arg0,ViewGroup arg1,Bundle arg2) {
     View layout=arg0.inflate(R.layout.about,arg1,false);
-    ;
     WebView web=layout.findViewById(R.id.aboutWebView);
     //为了方便在网络上实时更新，可以改为网络链接
     web.loadUrl("file:///android_asset/index.html");
