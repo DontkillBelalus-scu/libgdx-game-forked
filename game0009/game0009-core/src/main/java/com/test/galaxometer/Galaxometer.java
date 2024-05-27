@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 public class Galaxometer extends Game{
 
   public static Color[] colorList= {Color.RED,Color.ORANGE,Color.YELLOW,Color.GREEN,Color.BLUE,Color.PURPLE};
-  public static float G=6.754f;
+  public static final float G=6.754f;
   @Override
   public void create() {
     setScreen(new MainScreen());

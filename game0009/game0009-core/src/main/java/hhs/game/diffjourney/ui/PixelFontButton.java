@@ -38,12 +38,7 @@ public class PixelFontButton extends Widget{
   void updateDrawable() {
     drawable=down?ts.down:ts.up;
   }
-  @Override
-  public void layout() {
-    super.layout();
-    setSize(getPrefWidth(),getPrefHeight());
-    // TODO: Implement this method
-  }
+
   @Override
   public void draw(Batch batch,float arg1) {
     validate();
@@ -77,5 +72,6 @@ public class PixelFontButton extends Widget{
   }
   public void setScale(float scale) {
     this.scale=scale;
+    setSize(getPrefWidth(),getPrefHeight());
   }
 }

@@ -2,6 +2,7 @@ package hhs.game.diffjourney.item;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -51,6 +52,10 @@ public class Backpack extends ScrollPane{
         main.add(new ItemUi((Class<? extends ItemData>)Class.forName(val.getKey())));
       }catch(Exception e) {
         e.printStackTrace();
+        FileHandle fh=Gdx.files.absolute(
+          "/storage/emulated/0/Android/data/hhs.game.diffjourney/files/log.log");
+        fh.writeString(e.toString(),false);
+        Gdx.app.exit();
       }
     }
   }

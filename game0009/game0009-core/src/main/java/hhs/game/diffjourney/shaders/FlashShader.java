@@ -24,7 +24,7 @@ public class FlashShader implements Shader{
 
   @Override
   public void init() {
-    String vert="attribute vec4 "+ShaderProgram.POSITION_ATTRIBUTE+";\n" //
+    final String vert="attribute vec4 "+ShaderProgram.POSITION_ATTRIBUTE+";\n" //
       +"attribute vec4 "+ShaderProgram.COLOR_ATTRIBUTE+";\n" //
       +"attribute vec2 "+ShaderProgram.TEXCOORD_ATTRIBUTE+"0;\n" //
       +"uniform mat4 u_projTrans;\n" //

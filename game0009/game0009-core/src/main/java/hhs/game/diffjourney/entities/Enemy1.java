@@ -25,7 +25,7 @@ import squidpony.squidmath.Coord;
 public abstract class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
   implements Character.Attachable,Character.CanBeHurt<Enemy1>,Pool.Poolable{
   PercentageDisplay hpViewer=new PercentageDisplay(()->(data.hp/(float)data.maxHp));
-  public static FlashShader fshader=new FlashShader();
+  public static final FlashShader fshader=new FlashShader();
   public Character.Transformer transformer=Character.defaultTransformer;
   Vector2 tmp=new Vector2();
   Rectangle rtmp=new Rectangle();
