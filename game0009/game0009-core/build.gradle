@@ -2,7 +2,8 @@
 eclipse.project.name = appName + '0009-core'
 
 dependencies {
-
+  api 'com.crashinvaders.vfx:gdx-vfx-core:0.5.4'
+  api 'com.crashinvaders.vfx:gdx-vfx-effects:0.5.4'
   api 'com.squidpony:squidlib-util:3.0.6'
   api "$gdxCustomModule:gdx:$gdxCustomVersion"
   api "$gdxCustomModule:gdx-ai:1.8.2"
