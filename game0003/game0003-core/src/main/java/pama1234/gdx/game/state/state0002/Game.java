@@ -45,7 +45,7 @@ public class Game extends StateEntity0002{
     newGame(true,true);
 
     if(online()) onlineGameSetup();
-    buttons=UiGenerator.genButtons_0005(p);
+    buttons=UiGenerator.genReturnButton(p);
   }
   @Override
   public void display() {

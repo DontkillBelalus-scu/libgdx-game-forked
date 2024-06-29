@@ -18,8 +18,6 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Duel3D extends StateEntity0055{
 
-  public static ShapeDrawer customShapeDrawer;
-  public static SpriteBatch3D batch3d;
 
   public Duel3D(Screen0055 p) {
     super(p);
@@ -49,8 +47,6 @@ public class Duel3D extends StateEntity0055{
     telescope.min=1/32f;
 
     p.centerCamAddAll(telescope);
-
-    customShapeDrawer=new ShapeDrawer(batch3d=new SpriteBatch3D(p.cam3d.camera));
 
     bulletTarget=p.cam3d.point.pos;
     gameCenter=new GameCenter();
