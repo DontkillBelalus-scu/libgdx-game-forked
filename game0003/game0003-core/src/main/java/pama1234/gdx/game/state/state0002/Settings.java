@@ -23,43 +23,79 @@ public class Settings extends StateEntity0002{
   public TextEditor<?>[] textEditors;
   public TextButton<?>[] buttons;
   public TextButtonCam<?>[] camButtons;
+
   public Settings(Duel p,int id) {
     super(p,id);
     init();
   }
+
   @Override
   public void init() {
-    textEditors=genUi_0002(p);
+    textEditors=generateTextEditors(p);
     buttons=UiGenerator.genReturnButton(p);
-    camButtons=genButtons_0003(p);
+    camButtons=generateCamButtons(p);
   }
+
   @Override
   public void from(StateEntity0002 in) {
+    configureCameraForSettings();
+    addUiElements();
+  }
+
+  @Override
+  public void to(StateEntity0002 in) {
+    resetCameraConfiguration();
+    removeUiElements();
+  }
+
+  private void configureCameraForSettings() {
     p.camStrokeWeight=()->p.cam2d.pixelPerfect==CameraController2D.SMOOTH?p.cam2d.scale.pos:p.u/16*p.cam2d.scale.pos;
     p.cam2d.pixelPerfect=CameraController2D.SMOOTH;
     p.cam2d.scale.des=2;
     p.cam2d.point.des.y=40;
-    for(TextEditor<?> i:textEditors) {
-      p.centerCam.add.add(i);
-      i.addTo(p.camStage);
-    }
-    for(TextButton<?> i:buttons) p.centerScreen.add.add(i);
-    for(TextButtonCam<?> i:camButtons) p.centerCam.add.add(i);
-  }
-  @Override
-  public void to(StateEntity0002 in) {
-    p.camStrokeWeight=()->p.u/16*p.cam2d.scale.pos;
-    p.cam2d.pixelPerfect=CameraController2D.NONE;
-    for(TextEditor<?> i:textEditors) {
-      p.centerCam.remove.add(i);
-      i.removeFrom(p.camStage);
-    }
-    for(TextButton<?> i:buttons) p.centerScreen.remove.add(i);
-    for(TextButtonCam<?> i:camButtons) p.centerCam.remove.add(i);
   }
 
-  public static TextEditor<?>[] genUi_0002(Duel p) {
-    TextEditor<?>[] out=new TextEditor[] {new TextEditor<>(p,p.theme().stroke,-160,-160,320,480) {
+  private void resetCameraConfiguration() {
+    p.camStrokeWeight=()->p.u/16*p.cam2d.scale.pos;
+    p.cam2d.pixelPerfect=CameraController2D.NONE;
+  }
+
+  private void addUiElements() {
+    for(TextEditor<?> editor:textEditors) {
+      p.centerCam.add.add(editor);
+      editor.addTo(p.camStage);
+    }
+    for(TextButton<?> button:buttons) {
+      p.centerScreen.add.add(button);
+    }
+    for(TextButtonCam<?> camButton:camButtons) {
+      p.centerCam.add.add(camButton);
+    }
+  }
+
+  private void removeUiElements() {
+    for(TextEditor<?> editor:textEditors) {
+      p.centerCam.remove.add(editor);
+      editor.removeFrom(p.camStage);
+    }
+    for(TextButton<?> button:buttons) {
+      p.centerScreen.remove.add(button);
+    }
+    for(TextButtonCam<?> camButton:camButtons) {
+      p.centerCam.remove.add(camButton);
+    }
+  }
+
+  private static TextEditor<?>[] generateTextEditors(Duel p) {
+    TextEditor<?>[] editors=new TextEditor[] {
+      createSkinSettingsEditor(p),
+      createServerSettingsEditor(p)
+    };
+    return p.debug?editors:new TextEditor[] {editors[0]};
+  }
+
+  private static TextEditor<?> createSkinSettingsEditor(Duel p) {
+    return new TextEditor<>(p,p.theme().stroke,-160,-160,320,480) {
       @Override
       public void display() {
         super.display();
@@ -69,70 +105,96 @@ public class Settings extends StateEntity0002{
 
       @Override
       public void keyboardHidden(TextField in) {
-        if(in==textArea) try {
-          p.config.customThemeData.data=Duel.localization.yaml.load(textArea.getText());
-          p.theme(ThemeData.fromData(p.config.customThemeData));
-        }catch(RuntimeException e) {
-          textArea.setText(getSkinText(p));
+        if(in==textArea) {
+          try {
+            p.config.customThemeData.data=Duel.localization.yaml.load(textArea.getText());
+            p.theme(ThemeData.fromData(p.config.customThemeData));
+          }catch(RuntimeException e) {
+            textArea.setText(getSkinText(p));
+          }
         }
       }
-    },new TextEditor<>(p,p.theme().stroke,180,-160,320,60) {
-      @Override
-      public void keyboardHidden(TextField in) {
-        if(in==textArea) p.config.data.server=Duel.localization.yaml.loadAs(in.getText(),ServerAttr.class);
-      }
-    }};
-    out[0].textArea.setText(getSkinText(p));
-    out[0].textArea.setMessageText("皮肤设置");
-    out[1].textArea.setText(getServerAttrText(p));
-    out[1].textArea.setMessageText("联机设置");
-    return p.debug?out:new TextEditor[] {out[0]};
+    }.setTextAreaProperties(getSkinText(p),"皮肤设置");
   }
 
-  public static TextButtonCam<?>[] genButtons_0003(Duel p) {
+  private static TextEditor<?> createServerSettingsEditor(Duel p) {
+    return new TextEditor<>(p,p.theme().stroke,180,-160,320,60) {
+      @Override
+      public void keyboardHidden(TextField in) {
+        if(in==textArea) {
+          p.config.data.server=Duel.localization.yaml.loadAs(in.getText(),ServerAttr.class);
+        }
+      }
+    }.setTextAreaProperties(getServerAttrText(p),"联机设置");
+  }
+
+  private static TextButtonCam<?>[] generateCamButtons(Duel p) {
     return new TextButtonCam[] {
-      new TextButtonCam<>(p,self->self.text="重启游戏")
-        .allTextButtonEvent(self-> {},self-> {},self-> {
-          MainApp.instance.restartScreen();
-        })
-        .rectAuto(()->-40,()->-250),
-      new TextButtonCam<>(p,self->self.text="模式："+p.config.data.gameMode.toString(),()->p.debug,true)
-        .allTextButtonEvent(self-> {},self-> {},self-> {
-          p.config.data.gameMode=p.config.data.gameMode.next();
-          self.updateText();
-        })
-        .rectAuto(()->-40,()->-230),
-      new TextButtonCam<>(p,self->self.text="显示方向："+(p.config.data.orientation==MobileUtil.landscape?"横向":"竖向"))
-        .allTextButtonEvent(self-> {},self-> {},self-> {
-          p.config.data.orientation=(p.config.data.orientation+1)%2;
-          if(p.isAndroid) {
-            if(p.config.data.orientation==1) p.stateCenter.game.actrl.activeCondition=AndroidCtrlBase.portraitCondition;
-            else p.stateCenter.game.actrl.activeCondition=AndroidCtrlBase.landscapeCondition;
-            Pama.mobile.orientation(p.config.data.orientation);
-          }
-          self.updateText();
-        })
-        .rectAuto(()->-40,()->-210),
-      new TextButtonCam<>(p,self->self.text="主题："+p.config.data.themeType.toString())
-        .allTextButtonEvent(self-> {},self-> {},self-> {
-          p.config.data.themeType=p.config.data.nextTheme(p.config.data.themeType);
-          p.config.updateThemeFromType(p.config.data.themeType);
-          self.updateText();
-        })
-        .rectAuto(()->-40,()->-190),
-      // 音量控制条
-      new Slider<>(p,true,()->true,self-> {
-        p.config.data.volume=self.pos;
-        self.updateText();
-      },self-> {},self-> {},
-        self->self.text="音量："+String.format("%6.2f",p.config.data.volume*100),()->18,()->-40,()->-270,1)
-          .pos(p.config.data.volume),
-      new TextButtonCam<>(p,self->self.text="FPS修复：（需重启游戏）"+(p.config.data.fpsFix?"是":"否"))
-        .allTextButtonEvent(self-> {},self-> {},self-> {
-          p.config.data.fpsFix=!p.config.data.fpsFix;
-          self.updateText();
-        })
-        .rectAuto(()->-40,()->-290),
+      createRestartButton(p),
+      createGameModeButton(p),
+      createOrientationButton(p),
+      createThemeButton(p),
+      createVolumeSlider(p),
+      createFpsFixButton(p)
     };
+  }
+
+  private static TextButtonCam<?> createRestartButton(Duel p) {
+    return new TextButtonCam<>(p,self->self.text="重启游戏")
+      .allTextButtonEvent(self-> {},self-> {},self->MainApp.instance.restartScreen())
+      .rectAuto(()->-40,()->-250);
+  }
+
+  private static TextButtonCam<?> createGameModeButton(Duel p) {
+    return new TextButtonCam<>(p,self->self.text="模式："+p.config.data.gameMode.toString(),()->p.debug,true)
+      .allTextButtonEvent(self-> {},self-> {},self-> {
+        p.config.data.gameMode=p.config.data.gameMode.next();
+        self.updateText();
+      })
+      .rectAuto(()->-40,()->-230);
+  }
+
+  private static TextButtonCam<?> createOrientationButton(Duel p) {
+    return new TextButtonCam<>(p,self->self.text="显示方向："+(p.config.data.orientation==MobileUtil.landscape?"横向":"竖向"))
+      .allTextButtonEvent(self-> {},self-> {},self-> {
+        p.config.data.orientation=(p.config.data.orientation+1)%2;
+        if(p.isAndroid) {
+          if(p.config.data.orientation==1) {
+            p.stateCenter.game.actrl.activeCondition=AndroidCtrlBase.portraitCondition;
+          }else {
+            p.stateCenter.game.actrl.activeCondition=AndroidCtrlBase.landscapeCondition;
+          }
+          Pama.mobile.orientation(p.config.data.orientation);
+        }
+        self.updateText();
+      })
+      .rectAuto(()->-40,()->-210);
+  }
+
+  private static TextButtonCam<?> createThemeButton(Duel p) {
+    return new TextButtonCam<>(p,self->self.text="主题："+p.config.data.themeType.toString())
+      .allTextButtonEvent(self-> {},self-> {},self-> {
+        p.config.data.themeType=p.config.data.nextTheme(p.config.data.themeType);
+        p.config.updateThemeFromType(p.config.data.themeType);
+        self.updateText();
+      })
+      .rectAuto(()->-40,()->-190);
+  }
+
+  private static Slider<?> createVolumeSlider(Duel p) {
+    return new Slider<>(p,true,()->true,self-> {
+      p.config.data.volume=self.pos;
+      self.updateText();
+    },self-> {},self-> {},self->self.text="音量："+String.format("%6.2f",p.config.data.volume*100),()->18,()->-40,()->-270,1)
+      .pos(p.config.data.volume);
+  }
+
+  private static TextButtonCam<?> createFpsFixButton(Duel p) {
+    return new TextButtonCam<>(p,self->self.text="FPS修复：（需重启游戏）"+(p.config.data.fpsFix?"是":"否"))
+      .allTextButtonEvent(self-> {},self-> {},self-> {
+        p.config.data.fpsFix=!p.config.data.fpsFix;
+        self.updateText();
+      })
+      .rectAuto(()->-40,()->-290);
   }
 }

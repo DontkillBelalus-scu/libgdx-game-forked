@@ -56,6 +56,8 @@ import space.earlygrey.shapedrawer.CapType;
 public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
 
   public static final Serialization localization=new Serialization();
+  public static final int DEFAULT_PORT=12348;
+  public static final String DEFAULT_SERVER_ADDRESS="127.0.0.1";
 
   public int canvasSideLength=CANVAS_SIZE;
 
@@ -73,48 +75,59 @@ public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
 
   public Supplier<ClientGameSystem> core;
   public boolean debug;
+
   {
     // isAndroid=true;
     // doUpdateThread=true;
   }
+
   @Override
   public void init() {
     configMisc();
     super.init();
   }
-  public void configMisc() {
+
+  private void configMisc() {
     config=new Config();
     initConfig();
     if(isAndroid) Pama.mobile.orientation(config.data.orientation);
-    if(config.data.server==null) config.data.server=new ServerAttr("127.0.0.1",12348);
+    if(config.data.server==null) config.data.server=new ServerAttr(DEFAULT_SERVER_ADDRESS,DEFAULT_PORT);
     if(config.data.themeType==null) config.data.themeType=ThemeType.Light;
     if(config.data.gameMode==GameMode.OnLine) {
-      SocketHints socketHints=new SocketHints();
-      socketHints.connectTimeout=5000;
-      socketHints.socketTimeout=5000;
-      socketHints.keepAlive=true;
-      socketHints.performancePrefConnectionTime=0;
-      socketHints.performancePrefLatency=2;
-      socketHints.performancePrefBandwidth=1;
-      try {
-        gameClient=new GameClient(new SocketWrapperGDX(Gdx.net.newClientSocket(Protocol.TCP,config.data.server.addr,config.data.server.port,socketHints)));
-      }catch(RuntimeException ex) {
-        ex.printStackTrace();
-        config.data.gameMode=GameMode.OffLine;
-      }
+      setupGameClient();
     }
     debug=config.data.debug;
     if(config.data.fpsFix) threadedUpdate=true;
   }
-  public void initConfig() {
+
+  private void setupGameClient() {
+    SocketHints socketHints=new SocketHints();
+    socketHints.connectTimeout=5000;
+    socketHints.socketTimeout=5000;
+    socketHints.keepAlive=true;
+    socketHints.performancePrefConnectionTime=0;
+    socketHints.performancePrefLatency=2;
+    socketHints.performancePrefBandwidth=1;
+    try {
+      gameClient=new GameClient(new SocketWrapperGDX(Gdx.net.newClientSocket(Protocol.TCP,config.data.server.addr,config.data.server.port,socketHints)));
+    }catch(RuntimeException ex) {
+      ex.printStackTrace();
+      config.data.gameMode=GameMode.OffLine;
+    }
+  }
+
+  private void initConfig() {
     config.initConfig();
   }
+
   public ThemeData theme() {
     return config.theme;
   }
+
   public void theme(ThemeData in) {
     config.theme=in;
   }
+
   @Override
   public void setup() {
     stateCenter=new StateCenter0002(this);
@@ -130,15 +143,18 @@ public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
 
     if(config.data.mode==neat) neatE=new NeatEntity(this,game(),true);
 
+    setupGraphics();
+    demoInfo=new DemoInfo(this);
+    setupCamera();
+  }
+
+  private void setupGraphics() {
     backgroundColor(theme().background);
     strokeCap(CapType.NONE);
     setTextColor(theme().text);
-//    textColor(theme().text);
-    demoInfo=new DemoInfo(this);
-
-    setupCamera();
   }
-  public void setupCamera() {
+
+  private void setupCamera() {
     cam.point.des.set(canvasSideLength/2f,canvasSideLength/2f);
     cam.point.pos.set(cam.point.des);
     if(config.data.mode==neat) {
@@ -154,47 +170,62 @@ public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
       }
     }
   }
+
   @Override
   public void pause() {
     super.pause();
     if(isAndroid) config.saveConfig();
   }
+
   @Override
   public void dispose() {
     super.dispose();
     config.saveConfig();
   }
+
   @Override
   public void display() {
     if(config.data.mode==neat) neatE.display();
   }
+
   @Override
   public void displayWithCam() {}
+
   @Override
   public void update() {}
+
   @Override
   public void mousePressed(MouseInfo info) {}
+
   @Override
   public void keyPressed(char key,int keyCode) {}
+
   @Override
   public void keyReleased(char key,int keyCode) {}
+
   @Override
   public void frameResized() {
     strokeUnit=isAndroid?u/128f:u/64f;
   }
+
   @Override
   public void strokeWeight(float in) {
     super.strokeWeight(config.data.mode==neat?in:in*strokeUnit);
   }
+
   public void strokeWeightOriginal(float in) {
     super.strokeWeight(in);
   }
+
   @Override
   public void touchStarted(TouchInfo info) {}
+
   @Override
   public void touchMoved(TouchInfo info) {}
+
   @Override
   public void touchEnded(TouchInfo info) {}
+
   public void inGameStateChangeEvent(ClientGameSystem system,int stateIndex) {
     if(system.stateIndex==ClientGameSystem.play) {
       if(config.data.mode==neat) neatE.time=0;
@@ -204,13 +235,16 @@ public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
       }
     }
   }
+
   @Deprecated
   public Game game() {
     return (Game)state;
   }
+
   public ClientGameSystem core() {
     return core.get();
   }
+
   public boolean online() {
     return config.data.gameMode==GameMode.OnLine;
   }
