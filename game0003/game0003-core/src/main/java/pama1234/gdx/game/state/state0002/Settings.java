@@ -1,14 +1,12 @@
 package pama1234.gdx.game.state.state0002;
 
-import static pama1234.gdx.game.duel.util.input.UiGenerator.getServerAttrText;
-import static pama1234.gdx.game.duel.util.input.UiGenerator.getSkinText;
+import static pama1234.gdx.game.duel.util.input.UiGenerator.*;
 
 import pama1234.app.game.server.duel.ServerConfigData.ServerAttr;
 import pama1234.gdx.MobileUtil;
 import pama1234.gdx.Pama;
 import pama1234.gdx.game.duel.Duel;
 import pama1234.gdx.game.duel.State0002Util.StateEntity0002;
-import pama1234.gdx.game.duel.util.input.UiGenerator;
 import pama1234.gdx.game.duel.util.theme.ThemeData;
 import pama1234.gdx.game.ui.element.Slider;
 import pama1234.gdx.game.ui.element.TextButton;
@@ -17,6 +15,7 @@ import pama1234.gdx.game.ui.element.TextField;
 import pama1234.gdx.launcher.MainApp;
 import pama1234.gdx.util.android.AndroidCtrlBase;
 import pama1234.gdx.util.cam.CameraController2D;
+import pama1234.gdx.util.ui.ColorPicker;
 import pama1234.gdx.util.ui.editor.TextEditor;
 
 public class Settings extends StateEntity0002{
@@ -32,7 +31,7 @@ public class Settings extends StateEntity0002{
   @Override
   public void init() {
     textEditors=generateTextEditors(p);
-    buttons=UiGenerator.genReturnButton(p);
+    buttons=genReturnButton(p);
     camButtons=generateCamButtons(p);
   }
 
@@ -94,6 +93,30 @@ public class Settings extends StateEntity0002{
     return p.debug?editors:new TextEditor[] {editors[0]};
   }
 
+  private static TextButtonCam<?>[] generateThemeButtons(Duel p) {
+    return new TextButtonCam[] {
+      new TextButtonCam<>(p,self->self.text="背景颜色",()->true,true)
+        .allTextButtonEvent(self-> {},self-> {},self-> {
+          ColorPicker colorPicker=new ColorPicker(selectedColor-> {
+            p.theme().background=selectedColor;
+          });
+          colorPicker.setPosition(p.mouse.x,p.mouse.y);
+          colorPicker.show(p.camStage);
+        })
+        .rectAuto(()->120,()->-250),
+      new TextButtonCam<>(p,self->self.text="文本颜色",()->true,true)
+        .allTextButtonEvent(self-> {},self-> {},self-> {
+          ColorPicker colorPicker=new ColorPicker(selectedColor-> {
+            p.theme().text=selectedColor;
+          });
+          colorPicker.setPosition(p.mouse.x,p.mouse.y);
+          colorPicker.show(p.camStage);
+        })
+        .rectAuto(()->120,()->-230),
+      // Add more buttons for other settings as needed
+    };
+  }
+
   private static TextEditor<?> createSkinSettingsEditor(Duel p) {
     return new TextEditor<>(p,p.theme().stroke,-160,-160,320,480) {
       @Override
@@ -129,14 +152,21 @@ public class Settings extends StateEntity0002{
   }
 
   private static TextButtonCam<?>[] generateCamButtons(Duel p) {
-    return new TextButtonCam[] {
+    TextButtonCam[] themeButtons=generateThemeButtons(p);
+    TextButtonCam[] otherButtons=new TextButtonCam[] {
       createRestartButton(p),
       createGameModeButton(p),
       createOrientationButton(p),
       createThemeButton(p),
       createVolumeSlider(p),
-      createFpsFixButton(p)
+      createFpsFixButton(p),
     };
+
+    TextButtonCam<?>[] allButtons=new TextButtonCam[themeButtons.length+otherButtons.length];
+    System.arraycopy(themeButtons,0,allButtons,0,themeButtons.length);
+    System.arraycopy(otherButtons,0,allButtons,themeButtons.length,otherButtons.length);
+
+    return allButtons;
   }
 
   private static TextButtonCam<?> createRestartButton(Duel p) {
