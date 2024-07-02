@@ -146,17 +146,16 @@ public abstract class Enemy1 extends Character<Enemy1.Enemy1State,Enemy1>
   @Override
   public void render(SpriteBatch batch) {
     if(EntityTool.testBoundInCamera(this,cam)) {
-      if(state==State.hurt) {
-        batch.setShader(fshader.program);
-        fshader.program.bind();
-        fshader.setTime(ftime+=Gdx.graphics.getDeltaTime());
-      }
-
       dpos.set(pos);
       dsize.set(size);
       transformer.transform(dpos,dsize);
+      var oShader=batch.getShader();
+      if(state==State.hurt) {
+        batch.setShader(fshader.program);
+        fshader.setTime(ftime+=Gdx.graphics.getDeltaTime());
+      }
       if(tr!=null) batch.draw(tr,dpos.x,dpos.y,dsize.x,dsize.y);
-      batch.setShader(null);
+      batch.setShader(oShader);
       if(state!=State.death) hpViewer.render(batch);
     }
   }
