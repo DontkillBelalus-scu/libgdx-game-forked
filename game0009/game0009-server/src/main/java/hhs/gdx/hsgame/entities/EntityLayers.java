@@ -8,7 +8,7 @@ public class EntityLayers extends BasicEntity{
 
   public final static int ssize=20,msize=100,lsize=300;
   public static int lastId=0;
-  public Array<EntityCenter<BasicEntity>> layer;
+  Array<EntityCenter<BasicEntity>> layer;
   public EntityCenter<BasicEntity> back;
   public EntityCenter<BasicEntity> middle;
   public EntityCenter<BasicEntity> front;
@@ -19,10 +19,13 @@ public class EntityLayers extends BasicEntity{
     middle=new EntityCenter<>(lsize);
     front=new EntityCenter<>(msize);
 
+    layer.add(back);
+    layer.add(middle);
+    layer.add(front);
+
   }
 
   public void finlod() {
-    layer.clear();
     back.screen=screen;
     back.cam=cam;
     back.parent=this;
@@ -32,10 +35,6 @@ public class EntityLayers extends BasicEntity{
     front.screen=screen;
     front.cam=cam;
     front.parent=this;
-
-    layer.add(back);
-    layer.add(middle);
-    layer.add(front);
   }
 
   public void addEntity(BasicEntity entity) {

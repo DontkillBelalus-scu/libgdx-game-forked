@@ -32,7 +32,6 @@ public class Region extends BasicEntity implements Collision{
   boolean isAdd=false;
   boolean enableLight=true;
   float illuminationAttenuationCoefficient=0.09375f;
-  float ambientLight=0.6f;
   public int blockSize=50;
 
   public Region(
@@ -139,7 +138,7 @@ public class Region extends BasicEntity implements Collision{
             b.setT(ta.findRegion("floor"+MathUtils.random(1,8)));
         }
         if(!enableLight) continue;
-        float tmp=ambientLight;
+        float tmp=1;
         for(int a=0;a<8;a++) {
           if(getChar(i+fmove[a*2],j+fmove[a*2+1])=='#') tmp-=illuminationAttenuationCoefficient;
         }
@@ -220,13 +219,5 @@ public class Region extends BasicEntity implements Collision{
 
   public void setEnableLight(boolean enableLight) {
     this.enableLight=enableLight;
-  }
-
-  public float getAmbientLight() {
-    return this.ambientLight;
-  }
-
-  public void setAmbientLight(float ambientLight) {
-    this.ambientLight=ambientLight;
   }
 }

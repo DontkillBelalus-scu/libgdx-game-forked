@@ -7,10 +7,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool;
-import com.crashinvaders.vfx.effects.BloomEffect;
-import com.crashinvaders.vfx.effects.CrtEffect;
-import com.crashinvaders.vfx.effects.FilmGrainEffect;
-import com.crashinvaders.vfx.effects.FisheyeEffect;
 import hhs.game.diffjourney.attacks.ShotAttack;
 import hhs.game.diffjourney.entities.Enemy1;
 import hhs.game.diffjourney.entities.Mushroom;
@@ -19,7 +15,6 @@ import hhs.game.diffjourney.entities.enemies.MultipleEnemyGenerator;
 import hhs.game.diffjourney.map.Map;
 import hhs.game.diffjourney.map.Region;
 import hhs.game.diffjourney.screens.GameScreen;
-import hhs.game.diffjourney.vfx.VfxCenter;
 import hhs.gdx.hsgame.tools.CameraControlGesturer;
 import hhs.gdx.hsgame.tools.ColorTool;
 import hhs.gdx.hsgame.tools.EntityTool;
@@ -42,26 +37,7 @@ public class TestSence extends GameScreen{
   RNG rseed=new RNG(MathUtils.random(21000000));
   AStarSearch map;
   Pool<Mushroom> pool;
-
-  public VfxCenter vfx;
-
   public TestSence() {
-
-    vfx=new VfxCenter();
-    var be=new BloomEffect();
-    be.setBloomIntensity(be.getBloomIntensity()*2);
-    vfx.addEffect(be);
-    vfx.addEffect(new FilmGrainEffect());
-    var crt=new CrtEffect();
-    crt.setSizeSource(CrtEffect.SizeSource.SCREEN);
-    vfx.addEffect(crt);
-    var fe=new FisheyeEffect();
-    vfx.addEffect();
-
-    layers.middle=vfx;
-    layers.finlod();
-    d.addTrace(()->"effect"+be.getBloomIntensity());
-
     // setDebug(true);
     // play.setLooping(true);
     input.addProcessor(new GestureDetector(new CameraControlGesturer(camera)));
@@ -134,7 +110,6 @@ public class TestSence extends GameScreen{
             e.setInfo();
           }
         }));
-
   }
   public static void randomPos(RNG rseed,Vector2 pos,char[][] map,int w,int h) {
     int a=rseed.between(0,w),b=rseed.between(0,h);
@@ -160,11 +135,4 @@ public class TestSence extends GameScreen{
     // play.stop();
     // TODO: Implement this method
   }
-  @Override
-  public void render(float d) {
-    //var vfxManager=vfx.vfxManager;
-    vfx.beginBuffer();
-    super.render(d);
-  }
-
 }
