@@ -131,7 +131,7 @@ public class Duel extends Screen0055{
 
     backgroundColor(theme().background);
     strokeCap(CapType.NONE);
-    setTextColor(theme().text);
+    textColor(theme().text);
     //    textColor(theme().text);
     demoInfo=new DemoInfo(this);
 

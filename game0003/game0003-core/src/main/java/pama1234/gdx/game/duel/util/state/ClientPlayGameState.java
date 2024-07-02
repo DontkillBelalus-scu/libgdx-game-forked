@@ -39,7 +39,7 @@ public final class ClientPlayGameState extends ClientGameSystemState{
   @Override
   public void displayMessage() {
     if(properFrameCount>=messageDurationFrameCount) return;
-    p.setTextColor(p.theme().text,(int)(255*(1-(float)(properFrameCount)/messageDurationFrameCount)));
+    p.textColor(p.theme().text,(int)(255*(1-(float)(properFrameCount)/messageDurationFrameCount)));
     p.textScale(p.pus);
     p.textColor(p.theme().text);
     p.fullText(TextUtil.used.go.text,(p.width-TextUtil.used.go.width*p.pus)/2f,(p.height-p.pu)/2f);

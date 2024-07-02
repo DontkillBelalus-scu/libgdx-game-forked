@@ -35,7 +35,7 @@ public final class ClientGameResultState extends ClientGameSystemState{
   @Override
   public void displayMessage() {
     if(system.demoPlay) return;
-    p.setTextColor(p.theme().text);
+    p.textColor(p.theme().text);
     p.textScale(p.pus);
     p.fullText(resultMessage.text,(p.width-resultMessage.width*p.pus)/2f,(p.height-p.pu*2f)/2f);
     if(properFrameCount>durationFrameCount) p.fullText(

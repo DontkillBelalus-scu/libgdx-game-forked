@@ -34,7 +34,7 @@ public final class ClientStartGameState extends ClientGameSystemState{
     final int currentNumberFrameCount=properFrameCount%frameCountPerNumber;
     if(currentNumberFrameCount==0) displayNumber--;
     if(displayNumber<0) return;
-    p.setTextColor(ringColor);
+    p.textColor(ringColor);
     p.textScale(p.pus);
     String in=Integer.toString(displayNumber);
     // TODO 有问题，但不多

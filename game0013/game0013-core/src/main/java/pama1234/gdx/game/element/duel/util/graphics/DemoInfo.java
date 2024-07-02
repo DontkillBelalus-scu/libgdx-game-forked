@@ -27,7 +27,7 @@ public class DemoInfo extends Entity<Duel>{
     p.endShape();
     p.setTextScale(1);
     p.strokeWeightOriginal(1);
-    p.setTextColor(p.theme().text);
+    p.textColor(p.theme().text);
     // p.textColor(p.theme().text);
     if(p.isAndroid) drawText_ch_android(p,UtilMath.min(p.width,p.height));
     else drawText_ch(p,UtilMath.min(p.width,p.height));
@@ -63,7 +63,7 @@ public class DemoInfo extends Entity<Duel>{
     p.fullText("移动\n (或使用大招时进行瞄准)",300,245);
     p.fullText("- 按 Z 键开始游戏 -",192,330);
     p.fullText("(轻触显示或隐藏此界面)",192,360);
-    p.setTextColor(p.theme().text,192);
+    p.textColor(p.theme().text,192);
     p.fullText("由FAL制作！( https://www.fal-works.com/ )",20,400);
     p.fullText("由Pama1234移植到安卓版！( https://space.bilibili.com/646050693 )",20,420);
     p.fullText("原型版本，视觉BUG很多，敬请关注此开源项目！会更新联机版！",20,440);
@@ -82,7 +82,7 @@ public class DemoInfo extends Entity<Duel>{
 
     p.fullText("- 按 Z 键开始游戏 -",160,300);
     p.fullText("(轻触显示或隐藏此界面)",160,340);
-    p.setTextColor(p.theme().text,192);
+    p.textColor(p.theme().text,192);
     p.setTextScale(1);
     p.fullText("由FAL制作！( https://www.fal-works.com/ )",20,380);
     p.fullText("由Pama1234移植到安卓版！( https://space.bilibili.com/646050693 )",20,400);

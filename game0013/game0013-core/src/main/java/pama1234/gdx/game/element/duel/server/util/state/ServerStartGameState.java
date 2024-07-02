@@ -34,7 +34,7 @@ public class ServerStartGameState extends ServerGameSystemState{
   //   final int currentNumberFrameCount=properFrameCount%frameCountPerNumber;
   //   if(currentNumberFrameCount==0) displayNumber--;
   //   if(displayNumber<0) return;
-  //   p.setTextColor(ringColor);
+  //   p.textColor(ringColor);
   //   p.setTextScale(p.pus);
   //   String in=Integer.toString(displayNumber);
   //   p.fullText(in,(p.width-p.textWidth(in))/2f,(p.height-p.pu)/2f);

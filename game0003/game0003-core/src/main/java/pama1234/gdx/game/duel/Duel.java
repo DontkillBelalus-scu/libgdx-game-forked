@@ -145,13 +145,14 @@ public class Duel extends ScreenCoreState2D<StateCenter0002,StateEntity0002>{
 
     setupGraphics();
     demoInfo=new DemoInfo(this);
+    centerScreenAddAll(demoInfo);
     setupCamera();
   }
 
   private void setupGraphics() {
     backgroundColor(theme().background);
     strokeCap(CapType.NONE);
-    setTextColor(theme().text);
+    textColor(theme().text);
   }
 
   private void setupCamera() {
