@@ -36,7 +36,7 @@ public final class ClientGameResultState extends ClientGameSystemState {
   public void displayMessage() {
     if(system.demoPlay) return;
     p.textColor(p.theme().text);
-    p.setTextScale(p.pus);
+    p.textScale(p.pus);
     p.text(resultMessage.text,(p.width-resultMessage.width*p.pus)/2f,(p.height-p.pu*2f)/2f);
     if(properFrameCount>durationFrameCount) p.text(
       TextUtil.used.restart.text,

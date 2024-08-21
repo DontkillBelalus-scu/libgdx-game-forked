@@ -25,7 +25,7 @@ public class DemoInfo extends Entity<Duel>{
     p.rect(strokeWeight,strokeWeight,text.texture.getWidth()-strokeWeight,text.texture.getHeight()-strokeWeight*2);
     p.endBlend();
     p.endShape();
-    p.setTextScale(1);
+    p.textScale(1);
     p.strokeWeightOriginal(1);
     p.textColor(p.theme().text);
     // p.textColor(p.theme().text);
@@ -52,9 +52,9 @@ public class DemoInfo extends Entity<Duel>{
     p.text("(Click to hide this window)",192,475);
   }
   public static void drawText_ch(Duel p,int fu) {
-    p.setTextScale(3);
+    p.textScale(3);
     p.text("几何决斗！",180,20);
-    p.setTextScale(1);
+    p.textScale(1);
     p.text("      Z 按键:",180,100);
     p.text("      X 按键:",180,170);
     p.text("左手触摸屏幕:",180,245);
@@ -69,9 +69,9 @@ public class DemoInfo extends Entity<Duel>{
     p.text("原型版本，视觉BUG很多，敬请关注此开源项目！会更新联机版！",20,440);
   }
   public static void drawText_ch_android(Duel p,int fu) {
-    p.setTextScale(3);
+    p.textScale(3);
     p.text("几何决斗！",180,20);
-    p.setTextScale(2);
+    p.textScale(2);
     p.text("      Z 按键:",60,100);
     p.text("      X 按键:",60,140);
     p.text("左手触摸屏幕:",60,190);
@@ -83,7 +83,7 @@ public class DemoInfo extends Entity<Duel>{
     p.text("- 按 Z 键开始游戏 -",160,300);
     p.text("(轻触显示或隐藏此界面)",160,340);
     p.textColor(p.theme().text,192);
-    p.setTextScale(1);
+    p.textScale(1);
     p.text("由FAL制作！( https://www.fal-works.com/ )",20,380);
     p.text("由Pama1234移植到安卓版！( https://space.bilibili.com/646050693 )",20,400);
     p.text("敬请关注此开源项目！会更新联机版！",20,420);

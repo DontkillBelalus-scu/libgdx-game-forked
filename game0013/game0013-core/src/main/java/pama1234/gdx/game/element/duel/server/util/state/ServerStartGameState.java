@@ -35,10 +35,10 @@ public class ServerStartGameState extends ServerGameSystemState{
   //   if(currentNumberFrameCount==0) displayNumber--;
   //   if(displayNumber<0) return;
   //   p.textColor(ringColor);
-  //   p.setTextScale(p.pus);
+  //   p.textScale(p.pus);
   //   String in=Integer.toString(displayNumber);
   //   p.text(in,(p.width-p.textWidth(in))/2f,(p.height-p.pu)/2f);
-  //   p.setTextScale(1);
+  //   p.textScale(1);
   // }
   // public void drawRing() {
   //   p.rotate(UtilMath.HALF_PI);
