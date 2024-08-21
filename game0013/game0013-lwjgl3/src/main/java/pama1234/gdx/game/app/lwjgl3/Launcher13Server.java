@@ -3,7 +3,7 @@ package pama1234.gdx.game.app.lwjgl3;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
-public class LauncherLwjglServer{
+public class Launcher13Server {
   public static void main(String[] args) {
     createApplication();
   }
