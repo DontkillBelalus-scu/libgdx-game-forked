@@ -6,12 +6,13 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import pama1234.gdx.MobileUtil.EmptyMobileUtil;
 import pama1234.gdx.Pama;
 import pama1234.gdx.launcher.MainApp;
+import pama1234.util.gdx.lwjgl.Lwjgl3ApplicationPama;
 import pama1234.util.gdx.lwjgl.UtilLauncher;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Launcher03 extends UtilLauncher{
   public static void main(String[] args) {
-    Pama.mobile=new EmptyMobileUtil();
+    Lwjgl3ApplicationPama.init();
     // try {
     createApplication();
     // }catch(Exception e) {

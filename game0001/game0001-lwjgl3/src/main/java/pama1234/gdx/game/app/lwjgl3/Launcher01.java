@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 
 import pama1234.gdx.launcher.MainApp;
+import pama1234.util.gdx.lwjgl.Lwjgl3ApplicationPama;
 import pama1234.util.gdx.lwjgl.UtilLauncher;
 
 /** Launches the desktop (LWJGL3) application. */
@@ -12,6 +13,7 @@ public class Launcher01 extends UtilLauncher{
     createApplication();
   }
   public static Lwjgl3Application createApplication() {
+    Lwjgl3ApplicationPama.init();
     MainApp app=new MainApp();
     return new Lwjgl3Application(app,getConfiguration(app));
   }
