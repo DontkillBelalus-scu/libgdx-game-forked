@@ -9,7 +9,7 @@ import pama1234.gdx.launcher.MainApp;
 import pama1234.util.gdx.lwjgl.UtilLauncher;
 
 /** Launches the desktop (LWJGL3) application. */
-public class Launcher extends UtilLauncher{
+public class Launcher03 extends UtilLauncher{
   public static void main(String[] args) {
     Pama.mobile=new EmptyMobileUtil();
     // try {

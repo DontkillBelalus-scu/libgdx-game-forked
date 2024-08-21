@@ -38,8 +38,8 @@ public final class ClientStartGameState extends ClientGameSystemState{
     p.textScale(p.pus);
     String in=Integer.toString(displayNumber);
     // TODO 有问题，但不多
-    if(p.config.data.orientation==1) p.fullText(in,(p.width-p.textWidthNoScale(in)*p.pus)/2f,(p.height-p.width/3f-p.pu)/2f);
-    else p.fullText(in,(p.width-p.textWidthNoScale(in)*p.pus)/2f,(p.height-p.pu)/2f);
+    if(p.config.data.orientation==1) p.text(in,(p.width-p.textWidthNoScale(in)*p.pus)/2f,(p.height-p.width/3f-p.pu)/2f);
+    else p.text(in,(p.width-p.textWidthNoScale(in)*p.pus)/2f,(p.height-p.pu)/2f);
     p.textScale(1);
   }
   public void drawRing() {

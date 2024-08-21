@@ -4,48 +4,49 @@
 
 ## 开发工具
 
-> 可以搜索到详细的安装教程，此处不再赘述
+以下是开发本项目所需的主要工具，请按照指引进行安装和配置。
 
-### git
+### Git
 
-版本管理、多人协作
-<https://git-scm.com/>
+Git 是一个分布式版本控制系统，用于管理代码版本和多人协作。
 
-可选：git GUI 界面
+- 下载地址：<https://git-scm.com/>
+- 安装说明：按照官网提供的安装向导进行安装即可。
 
-- 使用 IDE 自带的 git 界面
-- 使用 Github 的客户端 <https://desktop.github.com/>
+#### Git 图形界面（可选）
 
-### libGDX
+为了更方便地使用 Git，你可以选择以下图形界面工具之一：
 
-游戏引擎
-<https://libgdx.com/wiki/start/setup>
+1. 使用集成开发环境（IDE）自带的 Git 界面
+2. 使用 GitHub 官方客户端：<https://desktop.github.com/>
 
-备注
+### LibGDX
 
-- IDEA 用户按照文档自行配置环境
-- 如果你没有安装过 IDEA，则建议直接安装 Android Studio 全家桶
-- 需要安装 2022.2.1 Beta 1 版本以后的 Android Studio 才支持 gradle 8.0+。  
-    （不然你只能使用命令行编译）
+LibGDX 是一个跨平台的游戏开发框架，用于本项目的游戏引擎。
 
-- vscode用户依然建议先安装Android Studio的preview版本<https://developer.android.com/studio/preview>
-- 推荐使用以下vscode扩展：
-  - <https://marketplace.visualstudio.com/items?itemName=pama1234.processing-pama1234-theme>
-  - <https://marketplace.visualstudio.com/items?itemName=pama1234.eclipse-pama1234-keymap>
+- 官方设置指南：<https://libgdx.com/wiki/start/setup>
 
-### Java (JDK)
+安装注意事项：
 
-Java 开发运行环境
-<https://adoptium.net/>
+- 对于 IntelliJ IDEA 用户：请按照官方文档自行配置环境。
+- Android Studio 版本要求：需要安装 2022.2.1 Beta 1 或更高版本，以支持 Gradle 8.0+。
+  （低于此版本只能使用命令行编译）
 
-注意！
+#### Visual Studio Code 用户注意事项
 
-- libGDX 要求 JDK 版本为：11~18。  
-    建议使用 JDK 17 (LTS) x64
+- 推荐安装以下 VS Code 扩展：
+  1. Processing Pama1234 Theme：<https://marketplace.visualstudio.com/items?itemName=pama1234.processing-pama1234-theme>
+  2. Eclipse Pama1234 Keymap：<https://marketplace.visualstudio.com/items?itemName=pama1234.eclipse-pama1234-keymap>
+
+### Java 开发工具包（JDK）
+
+JDK 提供了 Java 开发和运行环境。
+
+- 下载地址：<https://adoptium.net/>
+- 推荐使用 JDK 17 (LTS) 64位版本
 
 ## 环境配置
 
-- [IDEA/Android Studio] 开启 Gradle 面板  
-    不开启你的 Gradle 面板就是空的
-  - 打开 File/Settings/Experimental
-  - 取消掉 Gradle: Only include test tasks in the Gradle task...
+---
+
+请根据以上指南完成开发环境的配置。如遇到问题，可查阅各工具的官方文档或寻求社区帮助。
