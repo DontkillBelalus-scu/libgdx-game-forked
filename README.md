@@ -72,9 +72,9 @@ implementation 'com.github.pama1234.just-some-other-libgdx-game:framework:bf0a35
 
 ## 游戏合集
 
-1. 空想世界1
+1. 空想世界1[README.md](game0001%2FREADME.md)
 2. 粒子系统【暂停维护】
-3. 几何决斗【移植自 FAL 学生时期作品，已火】
+3. 几何决斗【移植自 FAL 学生时期作品，已火】[README.g03.md](game0003%2FREADME.g03.md)
 4. 高维塔防【3D 游戏模板】
 5. 杂项
 6. 中心 IDE

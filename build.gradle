@@ -76,106 +76,76 @@ spotless {
 allprojects{
 }
 
-// 所有的java性质项目
-configure(subprojects.findAll {
-  !(
-      it.name == 'games-collection' ||
-      it.name == 'framework0005-net-android' ||
-      it.name == 'taptap-framework' ||
-      it.name == 'game0001' ||
-      it.name == 'game0002' ||
-      it.name == 'game0003' ||
-      it.name == 'game0004' ||
-      it.name == 'game0005' ||
-      it.name == 'game0006' ||
-      it.name == 'game0007' ||
-      it.name == 'game0008' ||
-      it.name == 'game0009' ||
-      it.name == 'game0010' ||
-      it.name == 'game0011' ||
-      it.name == 'game0001-android' ||
-      it.name == 'game0001-pico4' || it.name == 'game0001-taptap' ||
-      it.name == 'game0002-android' || it.name == 'game0002-taptap' ||
-      it.name == 'game0002-android-cgj' ||
-      it.name == 'game0003-android' || it.name == 'game0003-taptap' ||
-      it.name == 'game0004-android' ||
-      it.name == 'game0005-android' ||
-      it.name == 'game0006-android' ||
-      it.name == 'game0007-android' || it.name == 'game0007-taptap' ||
-      it.name == 'game0008-android' || it.name == 'game0008-taptap' ||
-      it.name == 'game0009-android' ||
-      it.name == 'game0010-android' ||
-      it.name == 'game0011-android' || it.name == 'game0011-taptap' ||
-      it.name == 'game0013-android' || it.name == 'game0013-taptap' ||
-      it.name == 'game0015-android' || it.name == 'game0015-taptap'
-      )
-}) {
+// 过滤所有Java性质的子项目，排除指定的项目
+configure(subprojects.findAll { subproject ->
+  // 定义一个正则表达式模式，用于匹配要排除的项目名称
+  def excludedPattern = ~/^(games-collection|framework0005-net-android|taptap-framework|game\d{4}(-(android|pico4|taptap|cgj))?)$/
 
+  // 如果项目名称不匹配排除的模式，则返回true
+  !subproject.name.matches(excludedPattern)
+}) {
+  // 应用Java插件
   apply plugin: "java"
   apply plugin: 'java-library'
 
-  // apply plugin: "org.jetbrains.kotlin.jvm"
-
+  // 设置Java的源码兼容性版本为17
   sourceCompatibility = 17
+
   compileJava {
+    // 启用增量编译
     options.incremental = true
+    // 设置编译的字符编码为UTF-8
     options.encoding = 'UTF-8'
   }
 
   dependencies {
-    // This follows advice from https://blog.gradle.org/log4j-vulnerability
-    constraints {
-      implementation("org.apache.logging.log4j:log4j-core") {
-        version {
-          strictly("[2.17, 3[")
-          prefer("2.22.1")
-        }
-        because("CVE-2021-44228, CVE-2021-45046, CVE-2021-45105: Log4j vulnerable to remote code execution and other critical security vulnerabilities")
-      }
-    }
   }
 }
 
-// 所有的java性质和Android性质项目
-configure(subprojects.findAll {
-  !(
-      it.name == 'framework0001' ||
-      it.name == 'framework0002' ||
-      it.name == 'framework0003' ||
-      it.name == 'framework0004' ||
-      it.name == 'framework0005' ||
-      it.name == 'game0001' ||
-      it.name == 'game0002' ||
-      it.name == 'game0003' ||
-      it.name == 'game0004' ||
-      it.name == 'game0005' ||
-      it.name == 'game0006' ||
-      it.name == 'game0007' ||
-      it.name == 'game0008' ||
-      it.name == 'game0009' ||
-      it.name == 'game0010' ||
-      it.name == 'game0011'
-      )
+
+// 配置所有的Java性质和Android性质项目，排除特定项目
+configure(subprojects.findAll { project ->
+  // 使用正则表达式匹配项目名称
+  // 排除framework0001-framework0005和game0001-game0011
+  !project.name.matches(/^(framework000[1-5]|game00[0-1][1-9]?)$/)
 }) {
+  // 应用IDE相关插件
   apply plugin: 'idea'
   apply plugin: 'eclipse'
 
+  // 应用Shadow插件，用于创建fat JAR
   apply plugin: "com.github.johnrengelman.shadow"
+  // 应用Lombok插件，简化Java代码
   apply plugin: "io.freefair.lombok"
 
+  // 设置项目版本
   version = '0.0.1'
+  // 设置应用名称
   ext.appName = 'game'
+
+  // 配置项目仓库
   repositories {
+    // Google的Maven仓库
     maven { url 'https://maven.google.com/public' }
     maven { url 'https://maven.google.com/google' }
-    // maven { url 'https://maven.aliyun.com/repository/public' }
-    // maven { url 'https://maven.aliyun.com/repository/google' }
+
+    // 中央Maven仓库
     mavenCentral()
+
+    // Sonatype的OSS仓库
     maven { url 'https://s01.oss.sonatype.org' }
+
+    // 本地Maven仓库
     mavenLocal()
+
+    // Gradle插件门户
     gradlePluginPortal()
+
+    // Sonatype的快照仓库
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+
+    // 其他特定的Maven仓库
     maven { url 'https://maven.scijava.org/content/repositories/public/' }
     maven { url 'https://jitpack.io' }
     maven { url 'https://jogamp.org/deployment/maven/' }

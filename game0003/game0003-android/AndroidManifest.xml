@@ -16,7 +16,7 @@
 		android:theme="@style/GdxTheme"
 		android:dataExtractionRules="@xml/data_extraction_rules">
 		<activity
-			android:name="pama1234.gdx.game.app.android.AndroidLauncher"
+			android:name="pama1234.gdx.game.app.android.AndroidLauncher03"
 			android:screenOrientation="landscape"
 			android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout"
 			android:exported="true">
